@@ -46,4 +46,13 @@
 
 - nf-fluab pipeline validation: for sample 251211_S_I_084-S85 segment 4, a lot ambigious bases at the first 70bp from 5' end. IGV review confirmed consensus is right; use 251211_S_I_084-S85-bwa.rmdup.bam to do the visualization in IGV; update sent to Anita and Kanti.
 - continue working on rsv-analyzer validation
+## January 8
+- Genomics working group meeting
+- meet Anita to discuss what has happened to some of the influenza positive controls:
+  - mapping visualization of some of the segment 4 is very coloful, it means a lot mismatches.
+  - for me, it looks like positive control is contaminated
+- work on rsv consensus comparion between different methods
+- Get email from Vince that he has test pathogenseq2 and there are some errors and needs to follow up
+## January 9
+- working on rsv-analyzer validation
  
