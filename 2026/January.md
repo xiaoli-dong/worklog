@@ -1,5 +1,5 @@
 
-# Day-to-Day Lab Log
+# Day-to-Day Work Log
 
 ## January 5
 - Lab meeting: continued testing and validation of the **rsv-analyzer** pipeline.
