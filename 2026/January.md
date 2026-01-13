@@ -55,4 +55,17 @@
 - Get email from Vince that he has test pathogenseq2 and there are some errors and needs to follow up
 ## January 9
 - working on rsv-analyzer validation
+
+## January 12 Monday
+- one day off as vacation
+## January 13, Tuesday
+- working on consensus comparison between different platforms
+  - mafft aligned sequences from rsv-analyzer, viralrecon, viralassembly to the rsvA references:
+  ```
+  mafft rsvA_reference.fasta > rsvA_reference.mafft_aln.fasta
+  mafft --add all_rsvA.consensus.fasta --keeplength rsvA_reference.mafft_aln.fasta > all_rsvA.consensus.mafft_aln.fasta
+  snp-dists all_rsvA.consensus.mafft_aln.fasta > all_rsvA.snp-dists.tsv
+  python filter_match.py  all_rsvA.snp-dists.tsv all_rsvA.snp-dists.filtered.tsv 
+
+  ```
  
