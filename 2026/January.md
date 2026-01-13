@@ -65,7 +65,20 @@
   mafft rsvA_reference.fasta > rsvA_reference.mafft_aln.fasta
   mafft --add all_rsvA.consensus.fasta --keeplength rsvA_reference.mafft_aln.fasta > all_rsvA.consensus.mafft_aln.fasta
   snp-dists all_rsvA.consensus.mafft_aln.fasta > all_rsvA.snp-dists.tsv
-  python filter_match.py  all_rsvA.snp-dists.tsv all_rsvA.snp-dists.filtered.tsv 
+  python filter_match.py  all_rsvA.snp-dists.tsv all_rsvA.snp-dists.filtered.tsv
+  #split aligned sequences into files, one file per analysis
+  python split_aligned.py all_rsvA.consensus.mafft_aln.fasta
+  #output differences between paired samples in the format of:
+  #sample  reference       250121_S_N_012_len      250121_S_N_012_len      250121_S_N_012_Ns%      250121_S_N_012_Ns% status  diff_count      percent_identity        base_differences
+    s2      PP109421.1      15225   15225   42.62   39.88   IDENTICAL       0       100.00  []
+    s3      PP109421.1      15225   15225   41.94   40.61   IDENTICAL       0       100.00  []
+    s4      PP109421.1      15225   15225   34.66   31.47   IDENTICAL       0       100.00  []
+    s5      PP109421.1      15225   15225   56.38   51.34   DIFFERENT       1       99.98   [6971:C>A]
+  python compare_pairs_pisition_by_position.py 250121_S_N_012.mafft_align.fasta 250121_S_N_012_viralassembly.mafft_align.fasta 250121_S_N_012.rsv-analyzer_vs_viralassembly.diffs.tsv
 
   ```
+  By look into the results, the consensus are similar between paired samples by skiping Ns
+- metagenome meeting
+  - goal to enrich dna and rna virus from waste water:
+  - treatment dna, 
  
