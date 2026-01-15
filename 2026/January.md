@@ -81,4 +81,26 @@
 - metagenome meeting
   - goal to enrich dna and rna virus from waste water:
   - treatment dna, 
- 
+## January 14, Wednesday
+- nanopore webinar: global lessons from metagenomics for future critical care and pathogen surveillance
+- pathogenseq1.2 testing based on vince's testing results:
+  - PneumoCaT failed for all the samples of the illumina testing data: this is caused by the fastq file produced by hostile, in the new version of the hostile, the output file was *_fastp_1.hostile_clean_1* and *_fastp_2.hostile_clean_2*, the sample name would be *_fastp_1 and *_fastp_2, paired reads were treated as two single reads.
+## January 15, Thursday
+- prepare for the rsv-analyzer meeting:
+- nanopore:
+  - qc petya's pipeline used chopper cutoff: 300-1200, rsv-analyzer nf-qcflow used: 200-1500
+  - viralassembly pipeline
+    - rsv-analyzer: min_liength 500, max_len 1500, variant_caler=clair3, model: clair3_models/r1041_e82_400bps_hac_v430
+    - viralassembly default parameters: 
+    '''
+    // Medaka if using
+    medaka_model = 'r941_min_hac_g507'
+    // Clair3 if using
+    clair3_model = 'r941_prom_sup_g5014'
+    clair3_user_variant_model = ''
+    clair3_no_pool_split = false
+   '''
+- illumina:
+  - rsv-analyzer: fastp cutoff: len 50, avg_qual 20, nbase=0
+  - I did not find  how she did qc
+  
