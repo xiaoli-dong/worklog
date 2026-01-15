@@ -86,21 +86,21 @@
 - pathogenseq1.2 testing based on vince's testing results:
   - PneumoCaT failed for all the samples of the illumina testing data: this is caused by the fastq file produced by hostile, in the new version of the hostile, the output file was *_fastp_1.hostile_clean_1* and *_fastp_2.hostile_clean_2*, the sample name would be *_fastp_1 and *_fastp_2, paired reads were treated as two single reads.
 ## January 15, Thursday
-- prepare for the rsv-analyzer meeting:
-- nanopore:
-  - qc petya's pipeline used chopper cutoff: 300-1200, rsv-analyzer nf-qcflow used: 200-1500
-  - viralassembly pipeline
-    - rsv-analyzer: min_liength 500, max_len 1500, variant_caler=clair3, model: clair3_models/r1041_e82_400bps_hac_v430
-    - viralassembly default parameters: 
-    '''
-    // Medaka if using
-    medaka_model = 'r941_min_hac_g507'
-    // Clair3 if using
-    clair3_model = 'r941_prom_sup_g5014'
-    clair3_user_variant_model = ''
-    clair3_no_pool_split = false
-   '''
-- illumina:
-  - rsv-analyzer: fastp cutoff: len 50, avg_qual 20, nbase=0
-  - I did not find  how she did qc
-  
+- rsv-analyzer meeting:
+  - nanopore:
+    - qc petya's pipeline used chopper cutoff: 300-1200, rsv-analyzer nf-qcflow used: 200-1500
+    - viralassembly pipeline
+      - rsv-analyzer: min_len 500, max_len 1500, variant_caler=clair3, model: clair3_models/r1041_e82_400bps_hac_v430
+      - viralassembly default parameters: medaka_model = 'r941_min_hac_g507', clair3_model = 'r941_prom_sup_g5014'
+  - illumina:
+    - rsv-analyzer: fastp cutoff: len 50, avg_qual 20, nbase=0
+    - I did not find  how she did qc
+  - following up:
+    - do more comparison between nanopore rapid vs ligation: 231219_S_N_391_Ligation vs 231221_S_N_392_Rapid; 240124_S_N_020_Rapid vs 240124_S_N_021_Ligation; 241230_S_N_187_Rapid vs 012 samples
+    - for nanopore rapid, the data contains a lot short fragmnet, in order to keep more reliabe data, we increase quality cutoff with those short sequences
+  - <img height="250" alt="image" src="https://github.com/user-attachments/assets/d43ae36b-d873-4777-b106-18a750619c2d" />
+- rsv-analyzer:
+  - create rsv_nanopore_pipeline_for_rapid.sh: run nf-qcflow twice with different quality cutoffs
+    - q15 for lengths are between 200-499
+    - q10 for lengths are greater or equal to 500bp
+- continue working on pathogenseq1.2: hostile process is having bugs, after generating hostile output, the rename is not working well. 
