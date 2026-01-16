@@ -104,3 +104,7 @@
     - q15 for lengths are between 200-499
     - q10 for lengths are greater or equal to 500bp
 - continue working on pathogenseq1.2: hostile process is having bugs, after generating hostile output, the rename is not working well. 
+
+## January 16, Friday
+- checked the analysis results from yestday's jobs to see whether length cutoff of 200-1500bp makes a big differences? it generated the exact same rsv_master.tsv file. I looked into the viralassembly pipeline and min_len, and max_len parameter were designed for arctic pipeline. it is not applied for our data. It is using all the data we supplied, which is the data passed qc (200-1500bp)
+- setup comparison pairs kara sent to me on Thursday
