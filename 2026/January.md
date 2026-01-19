@@ -108,3 +108,11 @@
 ## January 16, Friday
 - checked the analysis results from yestday's jobs to see whether length cutoff of 200-1500bp makes a big differences? it generated the exact same rsv_master.tsv file. I looked into the viralassembly pipeline and min_len, and max_len parameter were designed for arctic pipeline. it is not applied for our data. It is using all the data we supplied, which is the data passed qc (200-1500bp)
 - setup comparison pairs kara sent to me on Thursday
+## January 19, Monday
+- Group meeting to do:
+  - nf-fluab: need to exclude the empty consensus files from the final report
+  - Linux tutorial
+  - rsv-analyzer comparision:
+    - nanopore rapid protocol consistently produce short fragments
+    - will compare one run between petya's analysis in December with one of rsv-analyzer
+    - deliver the comparison matrix for them to make decisions.  
