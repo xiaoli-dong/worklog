@@ -111,8 +111,16 @@
 ## January 19, Monday
 - Group meeting to do:
   - nf-fluab: need to exclude the empty consensus files from the final report
-  - Linux tutorial
+  - Linux tutorial access
   - rsv-analyzer comparision:
-    - nanopore rapid protocol consistently produce short fragments
-    - will compare one run between petya's analysis in December with one of rsv-analyzer
-    - deliver the comparison matrix for them to make decisions.  
+    - nanopore rapid protocol consistently produce short fragments, will do a paired run comparison with petya's analysis in terms of the how much good data retained in each pipeline for the rapid protcol
+    - deliver the comparison matrix for them to make decisions.
+- Working on finish the linux tutorial
+- 
+## January 20, Tuesday
+- Working on linux tutorial, delivered to the group
+- bioinformatics meeting:
+  - stefan is working on CPO
+  - andrew: improvide pathogenseq integration into pipeline launcher, nf-fluab tutorial is ready
+  - stefan, silas, petya will help stefan to working on data cleaning
+  - 
