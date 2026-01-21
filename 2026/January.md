@@ -139,9 +139,8 @@
      
   ## January 21, Wednesday
   - why rsv-analyzer produced lower number of the mapped reads with more input for mapping when compared with petya's pipeline (viralassembly)
-  - viralassembly uses "samtools view -c -F 0x904 sample.bam" command but rsv-analyzer uses "samtools stats" command
+    - viralassembly uses "samtools view -c -F 0x904 sample.bam" command but rsv-analyzer uses "samtools stats" command. I copied one bam file over to generate the mapped reads number with both tool, they give the same number. It means the discripency was not caused by tool difference
     - read over viralassembly pipelie again, the min_length and max_length was used by "artic guppyplex" to do the length fitlering before chopper. 
-    - copied one bam file over to generate the mapped reads number with both tool, they give the same number. It means the discripency was not caused by tool difference
     - read the rsv-analyzer code, in the pipeline, the custom config files were not correctly passed to the pipeline and the custom configurations were ignored and the defauts were used, fixed the bug
     - setup job with length cutoff of 200-1500 bp with newly updated pipeline.
     - 
