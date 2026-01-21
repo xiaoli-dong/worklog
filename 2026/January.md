@@ -125,7 +125,7 @@
   - stefan, silas, petya will help stefan to working on data cleaning
 - continues to working on rsv data comparison:
   - compared viraassembly out vs rsv-analyzer depth and completeness profile using _250121_S_N_012 (nanopore rapid). While completeness is very close, the depth profile is quite different. the viralassembly reported much high value for a lot samples.
-  - read into petya's pipeline and viralassembly pipeline. In the viralassembly pipeline, the depth profile were generated with "samtool depth" command and it is generated with "mosdepth" command:
+  - read into petya's pipeline and viralassembly pipeline. In the viralassembly pipeline, the depth profile were generated with "samtool depth" command and it is generated with "mosdepth" command in rsv-analyzer:
     ```
     mosdepth \
     --threads 6 \
@@ -135,8 +135,13 @@
     250121_S_N_012-barcode75.bam
 
     ```
-  - Conducted some online studies, it seems the results differences are expected especially when the data is fragmented. When sequences are short (200–500 bp), samtools depth reports higher depth than mosdepth because:
-      - samtools depth counts every base of each read, including split/supplementary alignments → short reads inflate depth.
-      - mosdepth excludes secondary/supplementary/duplicate reads by default and computes median per window (here 200 bp), so partially covered windows lower the mean.
-      - As read length increases, windows are fully covered and the difference decreases.
-      - ✅ Takeaway: The discrepancy is normal; mosdepth provides a more conservative, biologically meaningful depth, especially for fragmented Nanopore data.
+  - Conducted some online studies, it seems the results differences are expected especially when the data is fragmented. When sequences are short (200–500 bp), samtools depth reports higher depth than mosdepth
+     
+  ## January 21, Wednesday
+  - why rsv-analyzer produced lower number of the mapped reads with more input for mapping when compared with petya's pipeline (viralassembly)
+  - viralassembly uses "samtools view -c -F 0x904 sample.bam" command but rsv-analyzer uses "samtools stats" command
+    - read over viralassembly pipelie again, the min_length and max_length was used by "artic guppyplex" to do the length fitlering before chopper. 
+    - copied one bam file over to generate the mapped reads number with both tool, they give the same number. It means the discripency was not caused by tool difference
+    - read the rsv-analyzer code, in the pipeline, the custom config files were not correctly passed to the pipeline and the custom configurations were ignored and the defauts were used, fixed the bug
+    - setup job with length cutoff of 200-1500 bp with newly updated pipeline.
+    - 
