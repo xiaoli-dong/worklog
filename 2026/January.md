@@ -123,4 +123,20 @@
   - stefan is working on CPO
   - andrew: improvide pathogenseq integration into pipeline launcher, nf-fluab tutorial is ready
   - stefan, silas, petya will help stefan to working on data cleaning
-  - 
+- continues to working on rsv data comparison:
+  - compared viraassembly out vs rsv-analyzer depth and completeness profile using _250121_S_N_012 (nanopore rapid). While completeness is very close, the depth profile is quite different. the viralassembly reported much high value for a lot samples.
+  - read into petya's pipeline and viralassembly pipeline. In the viralassembly pipeline, the depth profile were generated with "samtool depth" command and it is generated with "mosdepth" command:
+    ```
+    mosdepth \
+    --threads 6 \
+    --fasta reference.fasta \
+    -n --fast-mode --by 200 --use-median --thresholds 0,10,30,100,500,1000 \
+    250121_S_N_012-barcode75 \
+    250121_S_N_012-barcode75.bam
+
+    ```
+  - Conducted some online studies, it seems the results differences are expected especially when the data is fragmented. When sequences are short (200–500 bp), samtools depth reports higher depth than mosdepth because:
+      - samtools depth counts every base of each read, including split/supplementary alignments → short reads inflate depth.
+      - mosdepth excludes secondary/supplementary/duplicate reads by default and computes median per window (here 200 bp), so partially covered windows lower the mean.
+      - As read length increases, windows are fully covered and the difference decreases.
+      - ✅ Takeaway: The discrepancy is normal; mosdepth provides a more conservative, biologically meaningful depth, especially for fragmented Nanopore data.
