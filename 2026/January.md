@@ -143,4 +143,13 @@
     - read over viralassembly pipelie again, the min_length and max_length was used by "artic guppyplex" to do the length fitlering before chopper. 
     - read the rsv-analyzer code, in the pipeline, the custom config files were not correctly passed to the pipeline and the custom configurations were ignored and the defauts were used, fixed the bug
     - setup job with length cutoff of 200-1500 bp with newly updated pipeline.
-    - 
+  -- working on pathogenseq pipeline to replace hostile with deacon,
+## January 22, Thursday 
+- rsv data analysis comparison continue:
+  - the analysis were hangling with all the data when setting up the minlen=200 for rsv-analyzer, it might be slrum configuration issues ( do not have enoght resouce for some of the samples), changed slurm.config to be the exact same as the one pathogenseq used.
+  - use only 10 samples to do the test with rsv-analyzer (minlen=200 and maxlen=1500). the analysis finished fast and checked the results, rsv-analyzer mapped read counts are higher than petya's viralassembly  
+  - so, the the mapped reads count differences were caused by the reads length cutoff (minlen=200, maxlen=1500, the defualt configuration is 200-3000, in petya's qc, she was using 300-1200
+  - call a meeting to review the resulsts before sending over to the group
+- nf-qcflow pipeline: tested, updated slurm.config and nextflow.config file and moved it to production directory (qcflow_pipeline)
+- nf-covflow pipeline: tested, updated slurm.config and nextflow.config files. move it to production directory (covflow_pipeline)
+- rsv-analyzer pipeline: move it to production directory (inside rsv directory)
