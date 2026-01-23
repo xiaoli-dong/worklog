@@ -153,3 +153,87 @@
 - nf-qcflow pipeline: tested, updated slurm.config and nextflow.config file and moved it to production directory (qcflow_pipeline)
 - nf-covflow pipeline: tested, updated slurm.config and nextflow.config files. move it to production directory (covflow_pipeline)
 - rsv-analyzer pipeline: move it to production directory (inside rsv directory)
+## January 23, Friday
+- RSV data analysis meeting (anita, kanti, jo, petya, kara)
+  - the descripency between petya's pipeline and rsv-analyzer was caused by the length cutoff (500-1500 and 300-1200)
+  - the original rapid data were analyzed by vince's pipeline "APL_Genomics/VL/PRL_virus_assembly_v4.sh", it gives 99% completeness but viralassembly and rsv-analyzer gives max 80% completeness. some of the amplicons get zero coverage (rsvA: 1, 8, 18, 19, 20, 21) in virassembly and rsv-analyzer
+  - things to do:
+    - look into vince's pipeline, figure out why?
+    - look into the bam files before viralassembly variant calling
+    - petya is going to process 012 samples rapid run with vince's pipeline
+- bam files:
+- in virusassembly pipeline, three bam files were generated for each sample step by step:
+  - 250116_S_N_012-barcode02.sorted.bam
+  - 250116_S_N_012-barcode02.trimmed.rg.sorted.bam
+  - 250116_S_N_012-barcode02.primertrimmed.rg.sorted.bam (used to do the variant calling)
+
+  Here is the commands for each step in viralassembly pipeline
+  ```
+  minimap2 \
+    -a \
+    -x map-ont \
+    -t 6 \
+    reference.fasta \
+    250116_S_N_012-barcode02.processed.fastq.gz \
+  | samtools view -bS -F 4 - \
+  | samtools sort -o 250116_S_N_012-barcode02.sorted.bam
+
+  samtools index 250116_S_N_012-barcode02.sorted.bam
+
+
+  align_trim \
+    --normalise 1000 --start \
+    --remove-incorrect-pairs \
+    --report 250116_S_N_012-barcode02.alignreport-start.txt \
+    scheme.bed \
+    < 250116_S_N_012-barcode02.sorted.bam 2> 250116_S_N_012-barcode02.alignreport-start.er | samtools sort -T 250116_S_N_012-barcode02 - -o 250116_S_N_012-barcode02.trimmed.rg.sorted.bam
+
+  samtools index 250116_S_N_012-barcode02.trimmed.rg.sorted.bam
+
+  align_trim \
+      --normalise 1000 \
+      --remove-incorrect-pairs \
+      --report 250116_S_N_012-barcode02.alignreport-primers.txt \
+      scheme.bed \
+      < 250116_S_N_012-barcode02.sorted.bam 2> 250116_S_N_012-barcode02.alignreport-primers.er | samtools sort -T 250116_S_N_012-barcode02 - -o 250116_S_N_012-barcode02.primertrimmed.rg.sorted.bam
+  
+  samtools index 250116_S_N_012-barcode02.primertrimmed.rg.sorted.bam
+  ```
+  - visualized bam files to see whether there are any reads mapped to the references originally?, if it is yes, check which step were elimilated?
+    -  it seems the "align_trim --remove-incorrect-pairs" are removing the reads in those droped regions
+    -  dropped regions:
+      -  amplicon_1: 1-768 (not good for all the platform)
+      -  amplicon_8: 3880-4660 
+      -  amplicon_18: 9015-9905 (mapping is very bad evern before align_trim for nanopore, even with "--remove-incorrect-pairs" removed, the depth is very bad, only a few depth, it is also not good in illumina run)
+      -  amplicon_19: 9846-10637
+      -   amplicon_20: 10480-11269 (nanopore mapping is very bad in the original mapping without any post process yet, the ilumina is better)
+      -   amplicon_21: 10987-11773
+      -   amplicon_26: 13883-15158 (original mapping is shallow, illumina is a little better)
+    - modify the local viralassembly pipeline and disabled "--remove-incorrect-pairs" option. there is no configuration option avaiable for that tool in viralassembly pipeline
+    - vince's nanopore pipeline is very simple:
+      ```
+      mpileupDepth=100000
+      ivarMinDepth=10
+      ivarQual=10
+      ivarFreqThreshold=0.75
+      ONTKeepLen=20
+      ONTQualThreshold=20
+      
+      minimap2 -ax map-ont -t "${cpus}" "${ref}" "$prefix"_rk.reads.fastq.gz \
+      | samtools view -F 4 -Sb \
+      | samtools sort -o aligned2ref/"$prefix".sorted.bam
+
+      samtools index aligned2ref/"$prefix".sorted.bam
+
+      keepLen="${ONTKeepLen}"
+      qualThreshold="${ONTQualThreshold}"
+
+      samtools flagstat -O tsv aligned2ref/"$prefix".sorted.bam > "$prefix"_bamstats.tsv
+      samtools mpileup -A -d "${mpileupDepth}" -Q 0 aligned2ref/"$prefix".sorted.bam \
+        | ivar consensus -p consensus/"$prefix".consensus -t "${ivarFreqThreshold}" -m "${ivarMinDepth}" -q "${ivarQual}" -n N
+      
+      samtools coverage ./aligned2ref/"$prefix".sorted.bam -o "$prefix"_coverage.tsv
+
+      
+      
+      ```
