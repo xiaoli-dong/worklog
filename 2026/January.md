@@ -237,7 +237,7 @@
       PP109421.1      8624    9367    RSVA-750_17     38      37      37  250116_S_N_012-barcode02
       PP109421.1      9015    9902    RSVA-750_18     1       0       0  250116_S_N_012-barcode02
       PP109421.1      9846    10637   RSVA-750_19     399     0       392  250116_S_N_012-barcode02
-      PP109421.1      10480   11269   RSVA-750_20     409     0       4  250116_S_N_012-barcode02 (primer)
+      PP109421.1      10480   11269   RSVA-750_20     409     0       4  250116_S_N_012-barcode02 
       PP109421.1      10987   11773   RSVA-750_21     1802    1168    1004  250116_S_N_012-barcode02
       PP109421.1      11542   12314   RSVA-750_22     2977    2000    1996  250116_S_N_012-barcode02
       PP109421.1      12029   12807   RSVA-750_23     2863    1501    1001  250116_S_N_012-barcode02
@@ -273,11 +273,13 @@
 
        ```
 
-## January 6, 2026
+## January 26, 2026
 
   - Group meeting: update rsv-analyzer
   - Bioinformatics meeting:
- 
+  - help anita on how to get unmapped reads from bam file out, suggest her to use samtool to do it
+  - work on debuging rsv-analyzer to see what is the reasons of the amplicon drop out
+    
     ```
     # new version of the align_trim
     align_trim --samfile ../250116_S_N_012-barcode02.sorted.bam \
@@ -286,105 +288,10 @@
       --amp-depth-report  amp_depth_report.tsv \
       --normalise 1000 scheme_7col.bed
 
-      more amp_depth_report.tsv 
-      chrom   amplicon        mean_depth
-      PP109421.1      1       0
-      PP109421.1      2       489.6422764227642
-      PP109421.1      3       942.507024265645
-      PP109421.1      4       915.6315789473684
-      PP109421.1      5       921.633423180593
-      PP109421.1      6       1.6197564276048715
-      PP109421.1      7       321.6948228882834
-      PP109421.1      8       749.8705128205128
-      PP109421.1      9       941.8212877792379
-      PP109421.1      10      162.35294117647058
-      PP109421.1      11      939.7675
-      PP109421.1      12      571.4345006485084
-      PP109421.1      13      582.4864165588616
-      PP109421.1      14      940.0013333333334
-      PP109421.1      15      940.9656084656085
-      PP109421.1      16      295.78742857142856
-      PP109421.1      17      33.63391655450875
-      PP109421.1      18      0
-      PP109421.1      19      364.9709228824273
-      PP109421.1      20      3.640050697084918
-      PP109421.1      21      942.9936386768447
-      PP109421.1      22      940.3173575129533
-      PP109421.1      23      930.0951156812339
-      PP109421.1      24      648.2577720207254
-      PP109421.1      25      780.0531914893617
-      PP109421.1      26      0
-      PP109421.1      27      0
-
-      ivar trim -b ../new_align_trim/scheme_7col.bed -p ivar_trim -i ../250116_S_N_012-barcode02.sorted.bam -q 1 -k -e -m 200
-      Found 54 primers in BED file
-      Reading from ../250116_S_N_012-barcode02.sorted.bam
-
-      -------
-      Results: 
-      Primer Name     Read Count
-      RSVA-750_1_LEFT_1       0
-      RSVA-750_1_RIGHT_3      0
-      RSVA-750_2_LEFT_1       554
-      RSVA-750_2_RIGHT_1      532
-      RSVA-750_3_LEFT_1       1148
-      RSVA-750_3_RIGHT_1      1007
-      RSVA-750_4_LEFT_1       691
-      RSVA-750_4_RIGHT_1      771
-      RSVA-750_5_LEFT_1       1253
-      RSVA-750_5_RIGHT_1      1229
-      RSVA-750_6_LEFT_1       2
-      RSVA-750_6_RIGHT_2      2
-      RSVA-750_7_LEFT_1       177
-      RSVA-750_7_RIGHT_1      320
-      RSVA-750_8_LEFT_1       787
-      RSVA-750_8_RIGHT_2      551
-      RSVA-750_9_LEFT_1       1255
-      RSVA-750_9_RIGHT_1      1278
-      RSVA-750_10_LEFT_1      180
-      RSVA-750_10_RIGHT_1     169
-      RSVA-750_11_LEFT_1      1056
-      RSVA-750_11_RIGHT_2     582
-      RSVA-750_12_LEFT_1      601
-      RSVA-750_12_RIGHT_1     438
-      RSVA-750_13_LEFT_1      622
-      RSVA-750_13_RIGHT_1     610
-      RSVA-750_14_LEFT_1      1432
-      RSVA-750_14_RIGHT_1     1461
-      RSVA-750_15_LEFT_1      1494
-      RSVA-750_15_RIGHT_1     854
-      RSVA-750_16_LEFT_1      312
-      RSVA-750_16_RIGHT_1     483
-      RSVA-750_17_LEFT_1      37
-      RSVA-750_17_RIGHT_1     21
-      RSVA-750_18_LEFT_2      0
-      RSVA-750_18_RIGHT_2     0
-      RSVA-750_19_LEFT_2      381
-      RSVA-750_19_RIGHT_1     222
-      RSVA-750_20_LEFT_2      3
-      RSVA-750_20_RIGHT_1     3
-      RSVA-750_21_LEFT_1      1790
-      RSVA-750_21_RIGHT_2     1778
-      RSVA-750_22_LEFT_1      624
-      RSVA-750_22_RIGHT_1     1163
-      RSVA-750_23_LEFT_1      1218
-      RSVA-750_23_RIGHT_1     2154
-      RSVA-750_24_LEFT_1      401
-      RSVA-750_24_RIGHT_1     390
-      RSVA-750_25_LEFT_1      843
-      RSVA-750_25_RIGHT_1     526
-      RSVA-750_26_LEFT_2      1
-      RSVA-750_26_RIGHT_2     0
-      RSVA-750_27_LEFT_1      0
-      RSVA-750_27_RIGHT_1     3
-
-      Trimmed primers from 98.18% (20885) of reads.
-      0.17% (37) of reads were quality trimmed below the minimum length of 200 bp and were marked as failed
-      1.77% (377) of reads started outside of primer regions. Since the -ek flags were given, these reads were written to file.
-      100% (21273) of reads had their insert size smaller than their read length
-      ```
+    ```
 
 ## January 27, Tuesday:
+- continue working on rsv-analyzer
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/dbfe2a6f-1a0b-4b07-acb9-f47d7fc9649f" />
 
@@ -406,64 +313,122 @@
 RSVA amplicon size:
 
 ```
-  AmpliconID      Size(bp)
-1               769
-2               739
-3               784
-4               742
-5               743
-6               740
-7               735
-8               781
-9               762
-10              749
-11              801
-12              772
-13              774
-14              751
-15              757
-16              876
-17              744
-18              888
-19              792
-20              790
-21              787
-22              773
-23              779
-24              773
-25              753
-26              1276
-27              735
-```
-
-rsvB amplicon size
+AmpliconID    RSV_A_Size(bp)    RSV_B_Size(bp)
+1             769               754
+2             739               736
+3             784               773
+4             742               751
+5             743               742
+6             740               753
+7             735               764
+8             781               757
+9             762               776
+10            749               729
+11            801               781
+12            772               781
+13            774               763
+14            751               747
+15            757               766
+16            876               873
+17            744               764
+18            888               783
+19            792               755
+20            790               754
+21            787               731
+22            773               745
+23            779               753
+24            773               844
+25            753               836
+26            1276              854
+27            735               NA
 
 ```
-AmpliconID      Size(bp)
-1               754
-2               736
-3               773
-4               751
-5               742
-6               753
-7               764
-8               757
-9               776
-10              729
-11              781
-12              781
-13              763
-14              747
-15              766
-16              873
-17              764
-18              783
-19              755
-20              754
-21              731
-22              745
-23              753
-24              844
-25              836
-26              854
+
+By looking into the visualization, amplicon 1, 18, 26, 27 are almost missing even from the original mapping. 20 is also not good. I feel those amplicons was not in the original product
+rsvA scheme
+
 ```
+PP109421.1      0       8       RSVA-750_1_LEFT_1       1       +       CGTACAACAAACTTGCGTAAACCA
+PP109421.1      742     768     RSVA-750_1_RIGHT_3      1       -       GCCTGTCTTTCATCWAGYTTTCTCAC
+PP109421.1      622     646     RSVA-750_2_LEFT_1       2       +       ACACCACAAAGACTGATGATCACA
+PP109421.1      1331    1360    RSVA-750_2_RIGHT_1      2       -       TGAGTATTTTTATGGTGTCTTCTCTTCCT
+PP109421.1      1182    1202    RSVA-750_3_LEFT_1       1       +       ATCCAACGGAGCACAGGAGA
+PP109421.1      1941    1965    RSVA-750_3_RIGHT_1      1       -       CACAACTTGTTCCATTTCTGCTTG
+PP109421.1      1849    1872    RSVA-750_4_LEFT_1       2       +       TTATGAATGCCTATGGTGCAGGG
+PP109421.1      2563    2590    RSVA-750_4_RIGHT_1      2       -       AGGGTCTTCTTTGAAACTTACTAGAGG
+PP109421.1      2299    2326    RSVA-750_5_LEFT_1       1       +       TGGGGCAAATAAATCATCATGGAAAAG
+PP109421.1      3011    3041    RSVA-750_5_RIGHT_1      1       -       AGAAATCTTCAAGTGATAGATCATTGTCAC
+PP109421.1      2930    2955    RSVA-750_6_LEFT_1       2       +       AGATGGCAAAAGACACATCAGATGA
+PP109421.1      3642    3669    RSVA-750_6_RIGHT_2      2       -       TTCACATAAAGCAATrATrTCATGTGT
+PP109421.1      3258    3280    RSVA-750_7_LEFT_1       1       +       TCCACATACACAGCTGCTGTTC
+PP109421.1      3967    3992    RSVA-750_7_RIGHT_1      1       -       TCTTCCATGGGTTTGATTGCAAATC
+PP109421.1      3880    3908    RSVA-750_8_LEFT_1       2       +       AAAGTCAATTCATAGTAGATCTTGGAGC
+PP109421.1      4635    4660    RSVA-750_8_RIGHT_2      2       -       TTTGGACATKYTTGCATTTGCCCCA
+PP109421.1      4432    4453    RSVA-750_9_LEFT_1       1       +       GCTACCAAGAGCTCGAGTCAA
+PP109421.1      5170    5193    RSVA-750_9_RIGHT_1      1       -       GTTGGATTGTTGCTGCATATGCT
+PP109421.1      4927    4949    RSVA-750_10_LEFT_1      2       +       CAGAATCCCCAGCTTGGAATCA
+PP109421.1      5648    5675    RSVA-750_10_RIGHT_1     2       -       TTTTGATTCTGTTTGATTTGGTCATGG
+PP109421.1      5234    5256    RSVA-750_11_LEFT_1      1       +       GAAAGAAAACCACCACCAAGCC
+PP109421.1      6011    6034    RSVA-750_11_RIGHT_2     1       -       CTTGGTAGTTCTCTTCTGGCTCG
+PP109421.1      5794    5818    RSVA-750_12_LEFT_1      2       +       TCAATCAACATGCAGTGCAGTTAG
+PP109421.1      6536    6565    RSVA-750_12_RIGHT_1     2       -       GACATGATAGAGTAACTTTGCTGTCTAAC
+PP109421.1      6212    6235    RSVA-750_13_LEFT_1      1       +       TCCACAAACAAGGCTGTAGTCAG
+PP109421.1      6959    6985    RSVA-750_13_RIGHT_1     1       -       CCACGATTTTTATTGGATGCTGTACA
+PP109421.1      6901    6924    RSVA-750_14_LEFT_1      2       +       AAGCAGCTCCGTTATCACATCTC
+PP109421.1      7629    7651    RSVA-750_14_RIGHT_1     2       -       CCTTCGTGACATATTTGCCCCA
+PP109421.1      7350    7370    RSVA-750_15_LEFT_1      1       +       CCAGAAGCACACCAGTCACA
+PP109421.1      8082    8106    RSVA-750_15_RIGHT_1     1       -       ACGTCTGCTGGCAATCTTTTTAAC
+PP109421.1      8053    8083    RSVA-750_16_LEFT_1      2       +       AGGAAGAACAATAAACAAACTATCCATCTG
+PP109421.1      8900    8928    RSVA-750_16_RIGHT_1     2       -       GCCCCAGTTTATTCAATATAGCATAGAC
+PP109421.1      8624    8654    RSVA-750_17_LEFT_1      1       +       GGAAGTTACATATTCAATGGTCCTTATCTC
+PP109421.1      9337    9367    RSVA-750_17_RIGHT_1     1       -       CTACTAAGGCTAATATCTTTCCATGTCAAG
+PP109421.1      9015    9042    RSVA-750_18_LEFT_2      2       +       CAGCTGTTAAGGATAATCAATCTCATC
+PP109421.1      9875    9902    RSVA-750_18_RIGHT_2     2       -       ACTACTTAACAAGTAAAATTTGGTCTC
+PP109421.1      9846    9874    RSVA-750_19_LEFT_2      1       +       CCATGGATGCTGTTAAAGTTAATTGCAA
+PP109421.1      10612   10637   RSVA-750_19_RIGHT_1     1       -       GCTGAGATCTGTGATGATAGAGCAC
+PP109421.1      10480   10510   RSVA-750_20_LEFT_2      2       +       CATTTTACAATTYTTyCCTGAAAGTCTTAC
+PP109421.1      11239   11269   RSVA-750_20_RIGHT_1     2       -       TGTGTCAAACTACCTATAGATTCTAGACTC
+PP109421.1      10987   11009   RSVA-750_21_LEFT_1      1       +       ACCAGTCAGACTCATGGAAGGT
+PP109421.1      11750   11773   RSVA-750_21_RIGHT_2     1       -       ACTGCCAGTCTATTGATTTCRCT
+PP109421.1      11542   11566   RSVA-750_22_LEFT_1      2       +       CCTCACAGAGGCTATAGTTCACTC
+PP109421.1      12292   12314   RSVA-750_22_RIGHT_1     2       -       TGGTTTAGTGGGTCCTCTCTCA
+PP109421.1      12029   12057   RSVA-750_23_LEFT_1      1       +       GAGATGATGAGGAAAAACATAACTTTGC
+PP109421.1      12781   12807   RSVA-750_23_RIGHT_1     1       -       TGGGAGGTTTCATCAAATGTATCTCA
+PP109421.1      12614   12641   RSVA-750_24_LEFT_1      2       +       CACTTTGATACTAGCCCTATTAATCGC
+PP109421.1      13358   13386   RSVA-750_24_RIGHT_1     2       -       CTGCTACATTAAGACGTTTAAGAAACCA
+PP109421.1      13243   13273   RSVA-750_25_LEFT_1      1       +       CAGTAGTTATTGGAAGTCTATGTCTAAGGT
+PP109421.1      13966   13995   RSVA-750_25_RIGHT_1     1       -       TGAATCTATTAATATGATGCCAAGGAAGC
+PP109421.1      13883   13911   RSVA-750_26_LEFT_2      2       +       AATACAGCCAAATCCAACCAACTTTACA
+PP109421.1      15126   15158   RSVA-750_26_RIGHT_2     2       -       AGATCAAAATGATAAYTTTAGGATTAGTTCAC
+PP109421.1      14082   14104   RSVA-750_27_LEFT_1      1       +       TCATAGGTGAAGGAGCAGGGAA
+PP109421.1      14792   14816   RSVA-750_27_RIGHT_1     1       -       GCTGAAAACTTCATTACGTCCAGC
+```
+for Amplicon 1
+```
+very bad alignment between primer and referecne 
+```
+For ampicon 18:
+
+```
+1          cagctgttaaggataatcaatctcatc left primer
+2          tagctgtcaaggataatcaatctcatc  ref
+           .******.*******************
+```
+
+for amplicon 26
+```
+1          aatacagccaaatccaaccaactttaca left primer
+2          aatacagccaaatctaaccaactttaca  ref
+           **************.*************
+
+#reverse primer
+
+1          agatcaaaatgataaytttaggattagttcac left primer
+2          agatcaaaatgataattttaggattagttcac
+           *************** **************** ref
+```
+for amplicon 27
+```
+we have exact matched primer
+```
+- matthew suggest to try the follwing pipelines: [artic-rsv](https://github.com/artic-network/artic-rsv) and [amplicon-nf](https://github.com/artic-network/amplicon-nf)
