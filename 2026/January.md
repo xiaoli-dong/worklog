@@ -247,14 +247,7 @@
       PP109421.1      14082   14816   RSVA-750_27     4       1       0  250116_S_N_012-barcode02
   
       ```
-      <img width="600" alt="image" src="https://github.com/user-attachments/assets/4bc0f140-cc0a-4c60-85c0-6f77ad567cb6" />
-      
-      **Figure 1.** depth profile with primer untrimmed bam: 250116_S_N_012-barcode02.sorted.bam (before using align_trim)
-      
-      <img width="600"  alt="image" src="https://github.com/user-attachments/assets/87100333-19df-4a06-b372-c8d2c22a22d4" />
-      
-      **Figure 2.** depth profile with primer trimmed bam: 250116_S_N_012-barcode02.primertrimmed.rg.sorted.bam
-    
+     
    
       - modify the local viralassembly pipeline and disabled "--remove-incorrect-pairs" from align_trim commnad becasue there is no configuration option avaiable for that tool in viralassembly pipeline but the viralassembly pipeline crashed downstream
 
@@ -285,7 +278,7 @@
   - Group meeting: update rsv-analyzer
   - Bioinformatics meeting:
  
-  ```
+    ```
     # new version of the align_trim
     align_trim --samfile ../250116_S_N_012-barcode02.sorted.bam \
       --output 250116_S_N_012-barcode02.trimmed.rg.sorted.bam \
@@ -389,7 +382,27 @@
       0.17% (37) of reads were quality trimmed below the minimum length of 200 bp and were marked as failed
       1.77% (377) of reads started outside of primer regions. Since the -ek flags were given, these reads were written to file.
       100% (21273) of reads had their insert size smaller than their read length
-    ```
+      ```
+
+## January 27, Tuesday:
+
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/dbfe2a6f-1a0b-4b07-acb9-f47d7fc9649f" />
+
+**Figure 1.** depth profile of illumina original protocol
+
+ <img width="600" alt="image" src="https://github.com/user-attachments/assets/4bc0f140-cc0a-4c60-85c0-6f77ad567cb6" />
+      
+**Figure 2.** depth profile with primer untrimmed bam: *.sorted.bam (before using align_trim)
+
+<img width="600"  alt="image" src="https://github.com/user-attachments/assets/87100333-19df-4a06-b372-c8d2c22a22d4" />
+
+**Figure 3.** depth profile with primer trimmed bam: *.primertrimmed.rg.sorted.bam
+    
+
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/8ab1502c-513c-4f50-ac7b-cf6cc20e275d" />
+ 
+ **Figure 4.** depth profile *.trimmed.rg.sorted.bam using align_trim 1.8.5
+
 RSVA amplicon size:
 
 ```
