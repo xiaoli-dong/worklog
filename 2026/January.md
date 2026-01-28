@@ -293,138 +293,143 @@
   
   ## January 27, Tuesday:
   - continue working on rsv-analyzer to see why some of the regions get very shallow depth:
-    - Visualize the depth profiles generated at the different stage, with different tools for nanpore ligation and one from illumina original protocol
-  
-      <img width="600" alt="image" src="https://github.com/user-attachments/assets/dbfe2a6f-1a0b-4b07-acb9-f47d7fc9649f" />
-      
-      **Figure 1.** depth profile of illumina original protocol
-      
-       <img width="600" alt="image" src="https://github.com/user-attachments/assets/4bc0f140-cc0a-4c60-85c0-6f77ad567cb6" />
+      - Visualize the depth profiles generated at the different stage, with different tools for nanpore ligation and one from illumina original protocol
+    
+        <img width="600" alt="image" src="https://github.com/user-attachments/assets/dbfe2a6f-1a0b-4b07-acb9-f47d7fc9649f" />
+        
+        **Figure 1.** depth profile of illumina original protocol
+        
+         <img width="600" alt="image" src="https://github.com/user-attachments/assets/4bc0f140-cc0a-4c60-85c0-6f77ad567cb6" />
+              
+        **Figure 2.** depth profile with primer untrimmed bam: *.sorted.bam (before using align_trim)
+        
+        <img width="600"  alt="image" src="https://github.com/user-attachments/assets/87100333-19df-4a06-b372-c8d2c22a22d4" />
+        
+        **Figure 3.** depth profile with primer trimmed bam: *.primertrimmed.rg.sorted.bam
             
-      **Figure 2.** depth profile with primer untrimmed bam: *.sorted.bam (before using align_trim)
-      
-      <img width="600"  alt="image" src="https://github.com/user-attachments/assets/87100333-19df-4a06-b372-c8d2c22a22d4" />
-      
-      **Figure 3.** depth profile with primer trimmed bam: *.primertrimmed.rg.sorted.bam
-          
-      
-      <img width="600" alt="image" src="https://github.com/user-attachments/assets/8ab1502c-513c-4f50-ac7b-cf6cc20e275d" />
-       
-       **Figure 4.** depth profile *.trimmed.rg.sorted.bam using align_trim 1.8.5
-  
-      By looking into the visualization, amplicon 1, 18, 26, 27 are almost missing even from the original mapping. 20 is also not good. I feel those amplicons was not in the original product
-  rsvA scheme
-  
-  - Are those missing regions have bigger amplicon size?
-    | AmpliconID | RSV_A_Amplicon_Size (bp) | RSV_B_Amplicon_Size (bp) |
-    |------------|--------------------------|--------------------------|
-    | **1**          | 769                      | 754                      |
-    | 2          | 739                      | 736                      |
-    | 3          | 784                      | 773                      |
-    | 4          | 742                      | 751                      |
-    | 5          | 743                      | 742                      |
-    | 6          | 740                      | 753                      |
-    | 7          | 735                      | 764                      |
-    | 8          | 781                      | 757                      |
-    | 9          | 762                      | 776                      |
-    | 10         | 749                      | 729                      |
-    | 11         | 801                      | 781                      |
-    | 12         | 772                      | 781                      |
-    | 13         | 774                      | 763                      |
-    | 14         | 751                      | 747                      |
-    | 15         | 757                      | 766                      |
-    | 16         | 876                      | 873                      |
-    | 17         | 744                      | 764                      |
-    | **18**         | 888                      | 783                      |
-    | 19         | 792                      | 755                      |
-    | 20         | 790                      | 754                      |
-    | 21         | 787                      | 731                      |
-    | 22         | 773                      | 745                      |
-    | 23         | 779                      | 753                      |
-    | 24         | 773                      | 844                      |
-    | 25         | 753                      | 836                      |
-    | **26**         | 1276                     | 854                      |
-    | **27**         | 735                      | NA                       |
-  
-  
-  - Are the primers in those missing regions not matching well with reference?
-    - the bed files used in the rsv-analyzer
-  
-    ```
-    PP109421.1      0       8       RSVA-750_1_LEFT_1       1       +       CGTACAACAAACTTGCGTAAACCA
-    PP109421.1      742     768     RSVA-750_1_RIGHT_3      1       -       GCCTGTCTTTCATCWAGYTTTCTCAC
-    PP109421.1      622     646     RSVA-750_2_LEFT_1       2       +       ACACCACAAAGACTGATGATCACA
-    PP109421.1      1331    1360    RSVA-750_2_RIGHT_1      2       -       TGAGTATTTTTATGGTGTCTTCTCTTCCT
-    PP109421.1      1182    1202    RSVA-750_3_LEFT_1       1       +       ATCCAACGGAGCACAGGAGA
-    PP109421.1      1941    1965    RSVA-750_3_RIGHT_1      1       -       CACAACTTGTTCCATTTCTGCTTG
-    PP109421.1      1849    1872    RSVA-750_4_LEFT_1       2       +       TTATGAATGCCTATGGTGCAGGG
-    PP109421.1      2563    2590    RSVA-750_4_RIGHT_1      2       -       AGGGTCTTCTTTGAAACTTACTAGAGG
-    PP109421.1      2299    2326    RSVA-750_5_LEFT_1       1       +       TGGGGCAAATAAATCATCATGGAAAAG
-    PP109421.1      3011    3041    RSVA-750_5_RIGHT_1      1       -       AGAAATCTTCAAGTGATAGATCATTGTCAC
-    PP109421.1      2930    2955    RSVA-750_6_LEFT_1       2       +       AGATGGCAAAAGACACATCAGATGA
-    PP109421.1      3642    3669    RSVA-750_6_RIGHT_2      2       -       TTCACATAAAGCAATrATrTCATGTGT
-    PP109421.1      3258    3280    RSVA-750_7_LEFT_1       1       +       TCCACATACACAGCTGCTGTTC
-    PP109421.1      3967    3992    RSVA-750_7_RIGHT_1      1       -       TCTTCCATGGGTTTGATTGCAAATC
-    PP109421.1      3880    3908    RSVA-750_8_LEFT_1       2       +       AAAGTCAATTCATAGTAGATCTTGGAGC
-    PP109421.1      4635    4660    RSVA-750_8_RIGHT_2      2       -       TTTGGACATKYTTGCATTTGCCCCA
-    PP109421.1      4432    4453    RSVA-750_9_LEFT_1       1       +       GCTACCAAGAGCTCGAGTCAA
-    PP109421.1      5170    5193    RSVA-750_9_RIGHT_1      1       -       GTTGGATTGTTGCTGCATATGCT
-    PP109421.1      4927    4949    RSVA-750_10_LEFT_1      2       +       CAGAATCCCCAGCTTGGAATCA
-    PP109421.1      5648    5675    RSVA-750_10_RIGHT_1     2       -       TTTTGATTCTGTTTGATTTGGTCATGG
-    PP109421.1      5234    5256    RSVA-750_11_LEFT_1      1       +       GAAAGAAAACCACCACCAAGCC
-    PP109421.1      6011    6034    RSVA-750_11_RIGHT_2     1       -       CTTGGTAGTTCTCTTCTGGCTCG
-    PP109421.1      5794    5818    RSVA-750_12_LEFT_1      2       +       TCAATCAACATGCAGTGCAGTTAG
-    PP109421.1      6536    6565    RSVA-750_12_RIGHT_1     2       -       GACATGATAGAGTAACTTTGCTGTCTAAC
-    PP109421.1      6212    6235    RSVA-750_13_LEFT_1      1       +       TCCACAAACAAGGCTGTAGTCAG
-    PP109421.1      6959    6985    RSVA-750_13_RIGHT_1     1       -       CCACGATTTTTATTGGATGCTGTACA
-    PP109421.1      6901    6924    RSVA-750_14_LEFT_1      2       +       AAGCAGCTCCGTTATCACATCTC
-    PP109421.1      7629    7651    RSVA-750_14_RIGHT_1     2       -       CCTTCGTGACATATTTGCCCCA
-    PP109421.1      7350    7370    RSVA-750_15_LEFT_1      1       +       CCAGAAGCACACCAGTCACA
-    PP109421.1      8082    8106    RSVA-750_15_RIGHT_1     1       -       ACGTCTGCTGGCAATCTTTTTAAC
-    PP109421.1      8053    8083    RSVA-750_16_LEFT_1      2       +       AGGAAGAACAATAAACAAACTATCCATCTG
-    PP109421.1      8900    8928    RSVA-750_16_RIGHT_1     2       -       GCCCCAGTTTATTCAATATAGCATAGAC
-    PP109421.1      8624    8654    RSVA-750_17_LEFT_1      1       +       GGAAGTTACATATTCAATGGTCCTTATCTC
-    PP109421.1      9337    9367    RSVA-750_17_RIGHT_1     1       -       CTACTAAGGCTAATATCTTTCCATGTCAAG
-    PP109421.1      9015    9042    RSVA-750_18_LEFT_2      2       +       CAGCTGTTAAGGATAATCAATCTCATC
-    PP109421.1      9875    9902    RSVA-750_18_RIGHT_2     2       -       ACTACTTAACAAGTAAAATTTGGTCTC
-    PP109421.1      9846    9874    RSVA-750_19_LEFT_2      1       +       CCATGGATGCTGTTAAAGTTAATTGCAA
-    PP109421.1      10612   10637   RSVA-750_19_RIGHT_1     1       -       GCTGAGATCTGTGATGATAGAGCAC
-    PP109421.1      10480   10510   RSVA-750_20_LEFT_2      2       +       CATTTTACAATTYTTyCCTGAAAGTCTTAC
-    PP109421.1      11239   11269   RSVA-750_20_RIGHT_1     2       -       TGTGTCAAACTACCTATAGATTCTAGACTC
-    PP109421.1      10987   11009   RSVA-750_21_LEFT_1      1       +       ACCAGTCAGACTCATGGAAGGT
-    PP109421.1      11750   11773   RSVA-750_21_RIGHT_2     1       -       ACTGCCAGTCTATTGATTTCRCT
-    PP109421.1      11542   11566   RSVA-750_22_LEFT_1      2       +       CCTCACAGAGGCTATAGTTCACTC
-    PP109421.1      12292   12314   RSVA-750_22_RIGHT_1     2       -       TGGTTTAGTGGGTCCTCTCTCA
-    PP109421.1      12029   12057   RSVA-750_23_LEFT_1      1       +       GAGATGATGAGGAAAAACATAACTTTGC
-    PP109421.1      12781   12807   RSVA-750_23_RIGHT_1     1       -       TGGGAGGTTTCATCAAATGTATCTCA
-    PP109421.1      12614   12641   RSVA-750_24_LEFT_1      2       +       CACTTTGATACTAGCCCTATTAATCGC
-    PP109421.1      13358   13386   RSVA-750_24_RIGHT_1     2       -       CTGCTACATTAAGACGTTTAAGAAACCA
-    PP109421.1      13243   13273   RSVA-750_25_LEFT_1      1       +       CAGTAGTTATTGGAAGTCTATGTCTAAGGT
-    PP109421.1      13966   13995   RSVA-750_25_RIGHT_1     1       -       TGAATCTATTAATATGATGCCAAGGAAGC
-    PP109421.1      13883   13911   RSVA-750_26_LEFT_2      2       +       AATACAGCCAAATCCAACCAACTTTACA
-    PP109421.1      15126   15158   RSVA-750_26_RIGHT_2     2       -       AGATCAAAATGATAAYTTTAGGATTAGTTCAC
-    PP109421.1      14082   14104   RSVA-750_27_LEFT_1      1       +       TCATAGGTGAAGGAGCAGGGAA
-    PP109421.1      14792   14816   RSVA-750_27_RIGHT_1     1       -       GCTGAAAACTTCATTACGTCCAGC
-    ```
-    - aligned the primers from missing regions to references to see whether the alignments are good?
-      - Amplicon 1: very bad alignment between primer and referecne 
-      - Ampicon 18:
-  
-        ```
-        1          cagctgttaaggataatcaatctcatc left primer
-        2          tagctgtcaaggataatcaatctcatc  ref
-                   .******.*******************
-        ```
-  
-    - amplicon 26
+        
+        <img width="600" alt="image" src="https://github.com/user-attachments/assets/8ab1502c-513c-4f50-ac7b-cf6cc20e275d" />
+         
+         **Figure 4.** depth profile *.trimmed.rg.sorted.bam using align_trim 1.8.5
+    
+        By looking into the visualization, amplicon 1, 18, 26, 27 are almost missing even from the original mapping. 20 is also not good. I feel those amplicons was not in the original product
+    rsvA scheme
+    
+    - Are those missing regions have bigger amplicon size?
+      | AmpliconID | RSV_A_Amplicon_Size (bp) | RSV_B_Amplicon_Size (bp) |
+      |------------|--------------------------|--------------------------|
+      | **1**          | 769                      | 754                      |
+      | 2          | 739                      | 736                      |
+      | 3          | 784                      | 773                      |
+      | 4          | 742                      | 751                      |
+      | 5          | 743                      | 742                      |
+      | 6          | 740                      | 753                      |
+      | 7          | 735                      | 764                      |
+      | 8          | 781                      | 757                      |
+      | 9          | 762                      | 776                      |
+      | 10         | 749                      | 729                      |
+      | 11         | 801                      | 781                      |
+      | 12         | 772                      | 781                      |
+      | 13         | 774                      | 763                      |
+      | 14         | 751                      | 747                      |
+      | 15         | 757                      | 766                      |
+      | 16         | 876                      | 873                      |
+      | 17         | 744                      | 764                      |
+      | **18**         | 888                      | 783                      |
+      | 19         | 792                      | 755                      |
+      | 20         | 790                      | 754                      |
+      | 21         | 787                      | 731                      |
+      | 22         | 773                      | 745                      |
+      | 23         | 779                      | 753                      |
+      | 24         | 773                      | 844                      |
+      | 25         | 753                      | 836                      |
+      | **26**         | 1276                     | 854                      |
+      | **27**         | 735                      | NA                       |
+    
+    
+    - Are the primers in those missing regions not matching well with reference?
+      - the bed files used in the rsv-analyzer
+    
       ```
-      1          aatacagccaaatccaaccaactttaca forward primer
-      2          aatacagccaaatctaaccaactttaca  ref
-                 **************.*************
-  
-      1          agatcaaaatgataaytttaggattagttcac reverse primer
-      2          agatcaaaatgataattttaggattagttcac
-                 *************** **************** ref
+      PP109421.1      0       8       RSVA-750_1_LEFT_1       1       +       CGTACAACAAACTTGCGTAAACCA
+      PP109421.1      742     768     RSVA-750_1_RIGHT_3      1       -       GCCTGTCTTTCATCWAGYTTTCTCAC
+      PP109421.1      622     646     RSVA-750_2_LEFT_1       2       +       ACACCACAAAGACTGATGATCACA
+      PP109421.1      1331    1360    RSVA-750_2_RIGHT_1      2       -       TGAGTATTTTTATGGTGTCTTCTCTTCCT
+      PP109421.1      1182    1202    RSVA-750_3_LEFT_1       1       +       ATCCAACGGAGCACAGGAGA
+      PP109421.1      1941    1965    RSVA-750_3_RIGHT_1      1       -       CACAACTTGTTCCATTTCTGCTTG
+      PP109421.1      1849    1872    RSVA-750_4_LEFT_1       2       +       TTATGAATGCCTATGGTGCAGGG
+      PP109421.1      2563    2590    RSVA-750_4_RIGHT_1      2       -       AGGGTCTTCTTTGAAACTTACTAGAGG
+      PP109421.1      2299    2326    RSVA-750_5_LEFT_1       1       +       TGGGGCAAATAAATCATCATGGAAAAG
+      PP109421.1      3011    3041    RSVA-750_5_RIGHT_1      1       -       AGAAATCTTCAAGTGATAGATCATTGTCAC
+      PP109421.1      2930    2955    RSVA-750_6_LEFT_1       2       +       AGATGGCAAAAGACACATCAGATGA
+      PP109421.1      3642    3669    RSVA-750_6_RIGHT_2      2       -       TTCACATAAAGCAATrATrTCATGTGT
+      PP109421.1      3258    3280    RSVA-750_7_LEFT_1       1       +       TCCACATACACAGCTGCTGTTC
+      PP109421.1      3967    3992    RSVA-750_7_RIGHT_1      1       -       TCTTCCATGGGTTTGATTGCAAATC
+      PP109421.1      3880    3908    RSVA-750_8_LEFT_1       2       +       AAAGTCAATTCATAGTAGATCTTGGAGC
+      PP109421.1      4635    4660    RSVA-750_8_RIGHT_2      2       -       TTTGGACATKYTTGCATTTGCCCCA
+      PP109421.1      4432    4453    RSVA-750_9_LEFT_1       1       +       GCTACCAAGAGCTCGAGTCAA
+      PP109421.1      5170    5193    RSVA-750_9_RIGHT_1      1       -       GTTGGATTGTTGCTGCATATGCT
+      PP109421.1      4927    4949    RSVA-750_10_LEFT_1      2       +       CAGAATCCCCAGCTTGGAATCA
+      PP109421.1      5648    5675    RSVA-750_10_RIGHT_1     2       -       TTTTGATTCTGTTTGATTTGGTCATGG
+      PP109421.1      5234    5256    RSVA-750_11_LEFT_1      1       +       GAAAGAAAACCACCACCAAGCC
+      PP109421.1      6011    6034    RSVA-750_11_RIGHT_2     1       -       CTTGGTAGTTCTCTTCTGGCTCG
+      PP109421.1      5794    5818    RSVA-750_12_LEFT_1      2       +       TCAATCAACATGCAGTGCAGTTAG
+      PP109421.1      6536    6565    RSVA-750_12_RIGHT_1     2       -       GACATGATAGAGTAACTTTGCTGTCTAAC
+      PP109421.1      6212    6235    RSVA-750_13_LEFT_1      1       +       TCCACAAACAAGGCTGTAGTCAG
+      PP109421.1      6959    6985    RSVA-750_13_RIGHT_1     1       -       CCACGATTTTTATTGGATGCTGTACA
+      PP109421.1      6901    6924    RSVA-750_14_LEFT_1      2       +       AAGCAGCTCCGTTATCACATCTC
+      PP109421.1      7629    7651    RSVA-750_14_RIGHT_1     2       -       CCTTCGTGACATATTTGCCCCA
+      PP109421.1      7350    7370    RSVA-750_15_LEFT_1      1       +       CCAGAAGCACACCAGTCACA
+      PP109421.1      8082    8106    RSVA-750_15_RIGHT_1     1       -       ACGTCTGCTGGCAATCTTTTTAAC
+      PP109421.1      8053    8083    RSVA-750_16_LEFT_1      2       +       AGGAAGAACAATAAACAAACTATCCATCTG
+      PP109421.1      8900    8928    RSVA-750_16_RIGHT_1     2       -       GCCCCAGTTTATTCAATATAGCATAGAC
+      PP109421.1      8624    8654    RSVA-750_17_LEFT_1      1       +       GGAAGTTACATATTCAATGGTCCTTATCTC
+      PP109421.1      9337    9367    RSVA-750_17_RIGHT_1     1       -       CTACTAAGGCTAATATCTTTCCATGTCAAG
+      PP109421.1      9015    9042    RSVA-750_18_LEFT_2      2       +       CAGCTGTTAAGGATAATCAATCTCATC
+      PP109421.1      9875    9902    RSVA-750_18_RIGHT_2     2       -       ACTACTTAACAAGTAAAATTTGGTCTC
+      PP109421.1      9846    9874    RSVA-750_19_LEFT_2      1       +       CCATGGATGCTGTTAAAGTTAATTGCAA
+      PP109421.1      10612   10637   RSVA-750_19_RIGHT_1     1       -       GCTGAGATCTGTGATGATAGAGCAC
+      PP109421.1      10480   10510   RSVA-750_20_LEFT_2      2       +       CATTTTACAATTYTTyCCTGAAAGTCTTAC
+      PP109421.1      11239   11269   RSVA-750_20_RIGHT_1     2       -       TGTGTCAAACTACCTATAGATTCTAGACTC
+      PP109421.1      10987   11009   RSVA-750_21_LEFT_1      1       +       ACCAGTCAGACTCATGGAAGGT
+      PP109421.1      11750   11773   RSVA-750_21_RIGHT_2     1       -       ACTGCCAGTCTATTGATTTCRCT
+      PP109421.1      11542   11566   RSVA-750_22_LEFT_1      2       +       CCTCACAGAGGCTATAGTTCACTC
+      PP109421.1      12292   12314   RSVA-750_22_RIGHT_1     2       -       TGGTTTAGTGGGTCCTCTCTCA
+      PP109421.1      12029   12057   RSVA-750_23_LEFT_1      1       +       GAGATGATGAGGAAAAACATAACTTTGC
+      PP109421.1      12781   12807   RSVA-750_23_RIGHT_1     1       -       TGGGAGGTTTCATCAAATGTATCTCA
+      PP109421.1      12614   12641   RSVA-750_24_LEFT_1      2       +       CACTTTGATACTAGCCCTATTAATCGC
+      PP109421.1      13358   13386   RSVA-750_24_RIGHT_1     2       -       CTGCTACATTAAGACGTTTAAGAAACCA
+      PP109421.1      13243   13273   RSVA-750_25_LEFT_1      1       +       CAGTAGTTATTGGAAGTCTATGTCTAAGGT
+      PP109421.1      13966   13995   RSVA-750_25_RIGHT_1     1       -       TGAATCTATTAATATGATGCCAAGGAAGC
+      PP109421.1      13883   13911   RSVA-750_26_LEFT_2      2       +       AATACAGCCAAATCCAACCAACTTTACA
+      PP109421.1      15126   15158   RSVA-750_26_RIGHT_2     2       -       AGATCAAAATGATAAYTTTAGGATTAGTTCAC
+      PP109421.1      14082   14104   RSVA-750_27_LEFT_1      1       +       TCATAGGTGAAGGAGCAGGGAA
+      PP109421.1      14792   14816   RSVA-750_27_RIGHT_1     1       -       GCTGAAAACTTCATTACGTCCAGC
       ```
-    - amplicon 27: we have exact matched primer
-    - matthew suggest to try the follwing pipelines: [artic-rsv](https://github.com/artic-network/artic-rsv) and [amplicon-nf](https://github.com/artic-network/amplicon-nf)
+      - aligned the primers from missing regions to references to see whether the alignments are good?
+        - Amplicon 1: very bad alignment between primer and referecne 
+        - Ampicon 18:
+    
+          ```
+          1          cagctgttaaggataatcaatctcatc left primer
+          2          tagctgtcaaggataatcaatctcatc  ref
+                     .******.*******************
+          ```
+    
+      - amplicon 26
+        ```
+        1          aatacagccaaatccaaccaactttaca forward primer
+        2          aatacagccaaatctaaccaactttaca  ref
+                   **************.*************
+    
+        1          agatcaaaatgataaytttaggattagttcac reverse primer
+        2          agatcaaaatgataattttaggattagttcac
+                   *************** **************** ref
+        ```
+      - amplicon 27: we have exact matched primer
+      - matthew suggest to try the follwing pipelines: [artic-rsv](https://github.com/artic-network/artic-rsv) and [amplicon-nf](https://github.com/artic-network/amplicon-nf)
+  - Help anita with influenza work: tried to get quality controlled reads which were not even getting into mapping stage because we do not have enough data to figure out the references
+    - use samtools to get unmapped reads
+    - build influenza database with cmd blast
+    - rum blast search command using unmapped reads against the local influenza sequence database
+  - Show Jo the new rsv-analyzer pipeline and help her settup the jobs. I need to clean up the pipeline inside rsv data directory and update sop  
