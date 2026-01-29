@@ -433,3 +433,14 @@
     - build influenza database with cmd blast
     - rum blast search command using unmapped reads against the local influenza sequence database
   - Show Jo the new rsv-analyzer pipeline and help her settup the jobs. I need to clean up the pipeline inside rsv data directory and update sop  
+
+## January 29, Thursday
+- get rsv-analyzer sop version 2 finished
+- testing pathogeneseq version 2
+- meeting tarah for 16s rRNA:
+  - wheter we can generate consensus (q20-30)
+  - want a clear cutoff in terms of abundance to seperate ngative, postivie controls and clinic samples
+- Talked with Kanti about ospC gene for Borrelia,
+  - a way to generate consensus instead of using CONCOMPRA ?
+  - ospC gene genotypes are very different from each other (more than 10%) and the product is only 600bp.
+  - Writting a ampvirconsensus pipeline to replace viralassembly to generate consensus becuase align_trim in viralassembly get rid of too much sequences.
