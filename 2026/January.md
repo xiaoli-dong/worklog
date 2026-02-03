@@ -444,3 +444,25 @@
   - a way to generate consensus instead of using CONCOMPRA ?
   - ospC gene genotypes are very different from each other (more than 10%) and the product is only 600bp.
   - Writting a ampvirconsensus pipeline to replace viralassembly to generate consensus becuase align_trim in viralassembly get rid of too much sequences.
+## Janumary 30, 2026, Friday
+- timesheet pp04 done
+- prepare borrelia data analysis meeting (kanti, tarah)
+  - Kanti: CONCOMPRA and a simpler approach of finding consensus sequences for each genotype in each sample might make more sense. The genotypes are very different from each other and the product is only 600bp.
+    - CONCOMPRA: CONsensus approach for COMmunity Profiling with nanopoRe Amplicon sequencing data.
+      - [Breaking free from references: a consensus-based approach for community profiling with long amplicon nanopore data](https://academic.oup.com/bib/article/26/1/bbae642/7924278)
+      - algothrim:
+        - reads filtering:
+          - reads outside of the user-defined length window;
+          - primer-chop was used to identify and trim primers and preceding the forward primer and trailling reverse primers.
+          - Using the mapping of the primers to the sequences to estimate the reates of insertion, deltion, and ssubstitutions in the sequencing data
+          - The top 80% of the forward, trimmed reads, with the fewest expected errors are retained using filtong
+      - clustering with UMAP-OPTICS, which is similar to the NanoClust based on their 3mr composition
+      - consensus is produced from a subset of the reads (40 by default, user defined parameter) using lamassemble with previously estimated insertion, deltion, and substitution rates
+      - uchime_denovo algorithm was used to flag the potential chimeric sequences for each sample (local chimeric sequences)
+      - Vsearch is used to deduplicate sequences and, optinally remove highly similar consensus sequences coming from the different samples.
+      - mapping reads back to the consenesus across samples using minimap2. reads that failed to map to the consensus sequences are written to a separate unmapped fastq file
+      - consensus sequences that are deemed chimeric based on the number of reads mapped to them across samples (vsearch uchime_denovo) are considered global chimeric sequences. the consensus sequences that have been flagged as local chimeric sequences or global chimeric sequences are removed in ofer to obtain a final, chimera-free consensus sequence table
+      - 
+  - why do not like this approach:  the results are not accurate? too complicated to understand?
+  - 500 - 700, 600-700, both ends have primers
+- fixed bugs in the pathogenseq2 and did testing, delivered it to vince for furthur testing 
