@@ -52,4 +52,13 @@
     - 16s rRNA, MAB114 kit
     - waster metagenomics:  kanti, run did not work great, did not pick up covid, 
 - Working on ospc data analysis pipeline with modified parameters
-
+## Thursday, February 5, 2026
+- Contiune to working on refining ospC gene analysis procedure:
+  - [Fitness estimates from experimental infections predict the long-term strain structure of a vector-borne pathogen in the field](https://www.nature.com/articles/s41598-017-01821-1)
+    - The ospC gene sequences can be classified into what are called ospC major groups (oMGs). The oMGs have a highly discrete pattern of genetic variation where each oMG is ≥8% different in DNA sequence from all other oMGs
+    - Within each oMG, the DNA sequence variation was <2%
+    - This finding is important because it shows that the oMG alleles are real biological categories that are relatively robust to errors in sequencing or to changes in the clustering protocol. For example, changing the similarity threshold of our clustering protocol from 93–98% did not affect the number of unique oMGs in our dataset
+- modify ospc analysis parameter:
+  - both end primers,  minlen=500, maxlen=700, merge_consensus 0.92, reads_consensus=100
+  - modify concompra to copy locally identified chimera from temporary dir to results
+- Analyzed some tb assembled data for Matt with nf-taxflow
