@@ -109,3 +109,45 @@
 
 ### RSV data analysis troubleshooting
 > <sub>We were talking about where we left this off and want to get more clarity on how to follow up.We agree that it looks like some amplicons have lower amplification efficiency and thus end up with fewer reads, however, the Illumina data does show genome coverage in this region (albeit lower), so what are we removing in the nanopore data that we are retaining in the Illumina data? The main motivation behind this question is that it is not trivial to go back to the drawing board and optimize primers and PCR for full genome sequencing of RSV. If we are absolutely sure that we cannot retrieve reads for these amplicons using Viralassembly on the ONT data, we will have to go back to the drawing board.Another clarification is that when Petya mentioned that primer sequences seems “potentially modified” in a group meeting a few weeks ago, she only meant that the new primers were ordered by ProvLab, the sequences are identical to the ones given to us by Henry’s lab.Let us know your thoughts and we will decide how we will proceed on the wet lab side.</sub>
+
+## Monday, February 9, 2026
+### work on setup the new project nf-viroflow
+- viralassembly from NML basically not working with rsv data because its align_trim funtions
+- we need a tool to do the downstream analysis in order to answer kant's question for rsv data
+- APL_Genomics and Gev are all filled up, figure out what's happened and who is using most of the spaces.
+  - one of the rsv analysis with minlen=200 used up 30 Tb of the space with the consensus file, do not know what's the problem.  
+---
+
+## Tuesday, February 10, 2026
+- continue to work on nf-viroflow
+---
+
+## Wednesday, February 11, 2026
+
+### Working on viroflow
+- implemented variant calling with clair3
+- implemented vcf_post_process
+- 
+### Provided ospC analysis method writting to Tarah and Kanti for kevin's conference paper abstract
+
+> <sub>Nanopore opsC amplicon reads were analyzed using the in-house ospc-tiller workflow: (1) Adapter trimming and quality filtering with fastplong (Chen, 2023) with command line options: “--length_required 500 --length_limit 700 --mean_qual 10". (2) Dehosting against tick genome NW_024609835.1 using Deacon (Constantinides et al., 2025). (3) Primer filtering to only retain reads with primers at both ends using Cutadapt (Martin, 2011) and in-house Python scripts. (4) High-quality, clean reads were analyzed with CONCOMPRA (Stock et al., 2024): "MIN=500; MAX=700; MERGE_CONSENSUS=0.92; READ_CONSENSUS=100". (5) Non-chimeric consensus sequences generated with CONCOMPRA were classified using BLASTn searches against a locally curated ospC typing database with command line options “-evalue 0.01 -perc_identity 90”.</sub>
+
+```
+References	
+fastp
+•	Chen S. (2023). Ultrafast one-pass FASTQ data preprocessing, quality control, and deduplication using fastp. iMeta 2: e107. https://doi.org/10.1002/imt2.107
+Cutadapt
+•	Martin M. (2011). Cutadapt removes adapter sequences from high-throughput sequencing reads. EMBnet.journal 17(1): 10-12. https://doi.org/10.14806/ej.17.1.200
+Deacon
+•	Constantinides B, Lees J, Crook DW. (2025). Deacon: fast sequence filtering and contaminant depletion. bioRxiv 2025.06.09.658732. https://doi.org/10.1101/2025.06.09.658732
+CONCOMPRA
+•	Stock W, et al. (2024). Breaking free references: a consensus-based approach for community profiling with long amplicon nanopore data. Briefings in Bioinformatics 26(1). https://doi.org/10.1093/bib/bbae660
+```
+---
+
+## Thursday, February 12, 2026
+
+### Timesheet due
+### CPLHN Genomics working group meeting
+### viroflow pipeline
+
