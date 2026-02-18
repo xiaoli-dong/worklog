@@ -152,4 +152,21 @@ CONCOMPRA
 #### Timesheet due
 #### CPLHN Genomics working group meeting
 #### viroflow pipeline
+---
 
+## Week 3
+
+### Monday, February 16, 2026
+- Family day long weekend
+---
+
+### Tuesday, February 17, 2026
+- vacation in phoenix
+---
+
+### Wednesday, February 18, 2026
+- refresh work and work on the nf-viroflow pipeline
+  - pipeline is working, then check each step to make sure the output from each step is working properly:
+    - minimap working
+    - align_trim: seems did not mask or trim off the primer 
+- get feedback about pathogenseq2 from vince and need to look into those errors
