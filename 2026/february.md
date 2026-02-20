@@ -186,5 +186,8 @@ CONCOMPRA
     > <sub>This controls how far outside of an amplicon boundary an alignment can be while still being considered a match to the primer.
      This is useful to control for instances where reads are not adapter / barcode trimmed (or incompletely trimmed) and
      these extra bases have some degree of homology with the reference leading to alignments extending beyond the amplicon boundary.</sub>
-   
+---
+
+### Friday, February 20, 2026
+- continue to work on nf-viroflow, check parameter and verify the results of the workflow step by step from mapping to consensus calling
    
