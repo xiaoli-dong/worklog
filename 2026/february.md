@@ -170,3 +170,21 @@ CONCOMPRA
     - minimap working
     - align_trim: seems did not mask or trim off the primer 
 - get feedback about pathogenseq2 from vince and need to look into those errors
+---
+
+### Thursday, February 19, 2026
+- nf-viroflow
+- inspect why the primer was not softmasked.
+  - align_trim (new version) — Summary
+    - BED file: 7-column format; 7th column = primer sequences.
+    - Primer sequences: used only for assigning reads to the correct amplicon (based on primer pair).
+    - Soft-masking / trimming: done using amplicon coordinates, not the actual primer sequence.
+    - Read ends: even if the primer is in the middle of the read, bases outside amplicon coordinates are trimmed/soft-masked.
+    - Padding (-p) allows fuzzy matching for reads with adapters/barcodes. (Add -p bases of padding to the outside (5' end of primer) of primer coordinates to allow fuzzy matching for reads with barcodes/adapters. (default: 35))
+    - the default value -p 35 is too aggresive and change it to -p 5 for our nanopore data
+      
+    > <sub>This controls how far outside of an amplicon boundary an alignment can be while still being considered a match to the primer.
+     This is useful to control for instances where reads are not adapter / barcode trimmed (or incompletely trimmed) and
+     these extra bases have some degree of homology with the reference leading to alignments extending beyond the amplicon boundary.</sub>
+   
+   
