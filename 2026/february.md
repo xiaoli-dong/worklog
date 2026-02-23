@@ -190,4 +190,10 @@ CONCOMPRA
 
 ### Friday, February 20, 2026
 - continue to work on nf-viroflow, check parameter and verify the results of the workflow step by step from mapping to consensus calling
-   
+---
+
+## week 4
+
+### Monday February 23, 2026
+
+- Group meeting
