@@ -199,4 +199,8 @@ CONCOMPRA
 - Group meeting
   - asked petya about how she processed mpox. she is using viralrecon in the same way as we did for rsv data
 - work on rsv workflow with the new implemented viroflow pipeline
-- make_summary_report.py has problems becuase nextclade seqName is not mathing chromosome_coverage_depth_summary.tsv 
+  - make_summary_report.py has problems becuase nextclade seqName is not mathing chromosome_coverage_depth_summary.tsv
+---
+
+### Tuesday February 24, 2026
+- working on integrating viroflow to rsv-analayzer
