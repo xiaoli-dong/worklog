@@ -204,3 +204,59 @@ CONCOMPRA
 
 ### Tuesday February 24, 2026
 - working on integrating viroflow to rsv-analayzer
+- in henry wong's paper, there is a supplimentary table, there are 27 pairs primers but the bed file we got from them has 26 pairs.
+- the coordinates in kingston's bed file are a bit off from the actually bam file coordinates. I used plsa bed file, the coordinates are more consistent with the bam coorindates
+- in the
+- reanalized the nanopore ligation samples with viroflow:
+
+  ```
+  Barcode	RSVA_1	RSVA_17	RSVA_18	RSVA_20	RSVA_26
+  barcode02	0	37	2	6	3
+  barcode03	0	145	9	15	19
+  barcode04	0	558	9	27	239
+  barcode05	0	23	1	1	3
+  barcode06	0	834	19	50	577
+  barcode07	0	484	2	66	3
+  barcode09	0	430	9	43	23
+  barcode29	1	139	61	118	170
+  barcode30	0	4	1	2	7
+  barcode31	0	500	11	21	319
+  barcode33	0	645	13	97	43
+  barcode35	0	674	6	96	16
+  barcode37	0	8	0	0	0
+  barcode39	0	5	0	1	2
+  barcode57	0	2	0	2	0
+  barcode68	0	0	0	0	2
+  barcode69	0	1743	41	105	619
+  barcode70	0	750	4	129	18
+  barcode71	0	956	15	153	24
+  barcode72	0	974	124	131	26
+  barcode73	0	431	2	51	19
+  barcode74	0	32	34	105	89
+  barcode76	0	1427	85	91	47
+  barcode77	213	160	693	1609	2714
+  barcode78	0	90	7	85	45
+  barcode79	0	0	0	0	0
+  barcode80	0	904	51	74	40
+  barcode81	0	1786	146	206	44
+  barcode82	0	78	1	6	15
+  barcode83	0	755	105	101	20
+  barcode84	1	408	73	59	21
+  barcode85	0	180	1	23	5
+  barcode86	0	0	0	0	0
+  barcode87	0	94	15	14	3
+  barcode88	1	470	96	67	24
+  barcode90	0	59	40	160	119
+  barcode91	0	696	16	42	59
+  barcode92	1	2245	135	352	71
+  barcode94	0	584	9	29	212
+  ```
+- in the viralrecon, make sure we did not filter out duplicates, then I used options "-ff UNMAP,SECONDARY,QCFAIL"
+
+### Feburary 25, 2026
+- working on reanalyze illumina orignal sequence data with modified parameters "-ff UNMAP,SECONDARY,QCFAIL", also, viralrecon can only accept 6 col bed file
+### Feb. 26, 2026
+- rsv-analyzer:
+- merge the summary tables from illumina orig, nanopore ligation, nanopore rapid
+- illumina, nanopore ligation have much deeper sequence depth comparing to nanopore rapid but the completeness of the rapid is not too bad. it is a little low but the lower completness was mainly caused by drop of a few amplicons. such as 1, 18, and 26,
+- for amplicon1, all the samples get zero depth but sample 77 has a good depth
