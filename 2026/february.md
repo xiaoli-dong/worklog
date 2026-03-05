@@ -105,158 +105,202 @@
 
 ---
 
-### Friday, February 5, 2026
+### Friday, February 6, 2026
 
-#### RSV data analysis troubleshooting
-> <sub>We were talking about where we left this off and want to get more clarity on how to follow up.We agree that it looks like some amplicons have lower amplification efficiency and thus end up with fewer reads, however, the Illumina data does show genome coverage in this region (albeit lower), so what are we removing in the nanopore data that we are retaining in the Illumina data? The main motivation behind this question is that it is not trivial to go back to the drawing board and optimize primers and PCR for full genome sequencing of RSV. If we are absolutely sure that we cannot retrieve reads for these amplicons using Viralassembly on the ONT data, we will have to go back to the drawing board.Another clarification is that when Petya mentioned that primer sequences seems “potentially modified” in a group meeting a few weeks ago, she only meant that the new primers were ordered by ProvLab, the sequences are identical to the ones given to us by Henry’s lab.Let us know your thoughts and we will decide how we will proceed on the wet lab side.</sub>
+#### RSV Data Analysis Troubleshooting
+> <sub>We were talking about where we left this off and want to get more clarity on how to follow up. We agree that it looks like some amplicons have lower amplification efficiency and thus end up with fewer reads, however, the Illumina data does show genome coverage in this region (albeit lower), so what are we removing in the nanopore data that we are retaining in the Illumina data? The main motivation behind this question is that it is not trivial to go back to the drawing board and optimize primers and PCR for full genome sequencing of RSV. If we are absolutely sure that we cannot retrieve reads for these amplicons using Viralassembly on the ONT data, we will have to go back to the drawing board. Another clarification is that when Petya mentioned that primer sequences seems "potentially modified" in a group meeting a few weeks ago, she only meant that the new primers were ordered by ProvLab, the sequences are identical to the ones given to us by Henry's lab. Let us know your thoughts and we will decide how we will proceed on the wet lab side.</sub>
 
-## Week 2
+---
+
+## Week 2 (Feb 9-13)
 
 ### Monday, February 9, 2026
-#### work on setup the new project nf-viroflow
-- viralassembly from NML basically not working with rsv data because its align_trim funtions
-- we need a tool to do the downstream analysis in order to answer kant's question for rsv data
-- APL_Genomics and Gev are all filled up, figure out what's happened and who is using most of the spaces.
-  - one of the rsv analysis with minlen=200 used up 30 Tb of the space with the consensus file, do not know what's the problem.  
+
+#### New Project Setup - nf-viroflow
+- Viralassembly from NML not working with RSV data due to align_trim functions
+- Need downstream analysis tool to answer Kanti's questions for RSV data
+- **Storage issue**: APL_Genomics and Gev directories filled up
+  - Investigation revealed: RSV analysis with `minlen=200` used 30 TB of space in consensus files
+  - Root cause unknown
+
 ---
 
 ### Tuesday, February 10, 2026
-- continue to work on nf-viroflow
+- Continued work on nf-viroflow pipeline
+
 ---
 
 ### Wednesday, February 11, 2026
 
-#### Working on viroflow
-- implemented variant calling with clair3
-- implemented vcf_post_process
-- 
-#### Provided ospC analysis method writting to Tarah and Kanti for kevin's conference paper abstract
+#### Viroflow Development
+- Implemented variant calling with Clair3
+- Implemented vcf_post_process
 
-> <sub>Nanopore opsC amplicon reads were analyzed using the in-house ospc-tiller workflow: (1) Adapter trimming and quality filtering with fastplong (Chen, 2023) with command line options: “--length_required 500 --length_limit 700 --mean_qual 10". (2) Dehosting against tick genome NW_024609835.1 using Deacon (Constantinides et al., 2025). (3) Primer filtering to only retain reads with primers at both ends using Cutadapt (Martin, 2011) and in-house Python scripts. (4) High-quality, clean reads were analyzed with CONCOMPRA (Stock et al., 2024): "MIN=500; MAX=700; MERGE_CONSENSUS=0.92; READ_CONSENSUS=100". (5) Non-chimeric consensus sequences generated with CONCOMPRA were classified using BLASTn searches against a locally curated ospC typing database with command line options “-evalue 0.01 -perc_identity 90”.</sub>
+#### Documentation
+- Provided ospC analysis methods section to Tarah and Kanti for Kevin's conference paper abstract:
 
-```
-References	
-fastp
-•	Chen S. (2023). Ultrafast one-pass FASTQ data preprocessing, quality control, and deduplication using fastp. iMeta 2: e107. https://doi.org/10.1002/imt2.107
-Cutadapt
-•	Martin M. (2011). Cutadapt removes adapter sequences from high-throughput sequencing reads. EMBnet.journal 17(1): 10-12. https://doi.org/10.14806/ej.17.1.200
-Deacon
-•	Constantinides B, Lees J, Crook DW. (2025). Deacon: fast sequence filtering and contaminant depletion. bioRxiv 2025.06.09.658732. https://doi.org/10.1101/2025.06.09.658732
-CONCOMPRA
-•	Stock W, et al. (2024). Breaking free references: a consensus-based approach for community profiling with long amplicon nanopore data. Briefings in Bioinformatics 26(1). https://doi.org/10.1093/bib/bbae660
-```
+> <sub>Nanopore ospC amplicon reads were analyzed using the in-house ospc-tiller workflow: (1) Adapter trimming and quality filtering with fastplong (Chen, 2023) with command line options: "--length_required 500 --length_limit 700 --mean_qual 10". (2) Dehosting against tick genome NW_024609835.1 using Deacon (Constantinides et al., 2025). (3) Primer filtering to only retain reads with primers at both ends using Cutadapt (Martin, 2011) and in-house Python scripts. (4) High-quality, clean reads were analyzed with CONCOMPRA (Stock et al., 2024): "MIN=500; MAX=700; MERGE_CONSENSUS=0.92; READ_CONSENSUS=100". (5) Non-chimeric consensus sequences generated with CONCOMPRA were classified using BLASTn searches against a locally curated ospC typing database with command line options "-evalue 0.01 -perc_identity 90".</sub>
+
+**References**
+
+**fastp**
+- Chen S. (2023). Ultrafast one-pass FASTQ data preprocessing, quality control, and deduplication using fastp. *iMeta* 2: e107. https://doi.org/10.1002/imt2.107
+
+**Cutadapt**
+- Martin M. (2011). Cutadapt removes adapter sequences from high-throughput sequencing reads. *EMBnet.journal* 17(1): 10-12. https://doi.org/10.14806/ej.17.1.200
+
+**Deacon**
+- Constantinides B, Lees J, Crook DW. (2025). Deacon: fast sequence filtering and contaminant depletion. *bioRxiv* 2025.06.09.658732. https://doi.org/10.1101/2025.06.09.658732
+
+**CONCOMPRA**
+- Stock W, et al. (2024). Breaking free from references: a consensus-based approach for community profiling with long amplicon nanopore data. *Briefings in Bioinformatics* 26(1). https://doi.org/10.1093/bib/bbae660
+
 ---
 
 ### Thursday, February 12, 2026
+- Timesheet due
+- CPLHN Genomics working group meeting
+- Continued viroflow pipeline development
 
-#### Timesheet due
-#### CPLHN Genomics working group meeting
-#### viroflow pipeline
 ---
 
-## Week 3
+## Week 3 (Feb 16-20)
 
 ### Monday, February 16, 2026
-- Family day long weekend
+- Family Day long weekend
+
 ---
 
 ### Tuesday, February 17, 2026
-- vacation in phoenix
+- Vacation in Phoenix
+
 ---
 
 ### Wednesday, February 18, 2026
-- refresh work and work on the nf-viroflow pipeline
-  - pipeline is working, then check each step to make sure the output from each step is working properly:
-    - minimap working
-    - align_trim: seems did not mask or trim off the primer 
-- get feedback about pathogenseq2 from vince and need to look into those errors
+
+#### Back to Work
+- Refreshed and resumed nf-viroflow pipeline work
+- Pipeline verification - checking each step for proper output:
+  - Minimap: working
+  - align_trim: appears not to mask or trim primers properly
+- Received feedback from Vince about pathogenseq2 errors - need to investigate
+
 ---
 
 ### Thursday, February 19, 2026
-- nf-viroflow
-- inspect why the primer was not softmasked.
-  - align_trim (new version) — Summary
-    - BED file: 7-column format; 7th column = primer sequences.
-    - Primer sequences: used only for assigning reads to the correct amplicon (based on primer pair).
-    - Soft-masking / trimming: done using amplicon coordinates, not the actual primer sequence.
-    - Read ends: even if the primer is in the middle of the read, bases outside amplicon coordinates are trimmed/soft-masked.
-    - Padding (-p) allows fuzzy matching for reads with adapters/barcodes. (Add -p bases of padding to the outside (5' end of primer) of primer coordinates to allow fuzzy matching for reads with barcodes/adapters. (default: 35))
-    - the default value -p 35 is too aggresive and change it to -p 5 for our nanopore data
-      
-    > <sub>This controls how far outside of an amplicon boundary an alignment can be while still being considered a match to the primer.
-     This is useful to control for instances where reads are not adapter / barcode trimmed (or incompletely trimmed) and
-     these extra bases have some degree of homology with the reference leading to alignments extending beyond the amplicon boundary.</sub>
+
+#### nf-viroflow - Primer Masking Investigation
+- Investigated why primers were not being soft-masked
+
+**align_trim (new version) - Key Findings:**
+- **BED file format**: 7-column format; 7th column contains primer sequences
+- **Primer sequences usage**: Only used for assigning reads to correct amplicon (based on primer pair)
+- **Soft-masking/trimming mechanism**: Performed using amplicon coordinates, NOT actual primer sequence
+- **Read end handling**: Bases outside amplicon coordinates are trimmed/soft-masked, even if primer is in middle of read
+- **Padding parameter** (`-p`): Allows fuzzy matching for reads with adapters/barcodes
+  - Default `-p 35` too aggressive for our Nanopore data
+  - Changed to `-p 5`
+  
+> <sub>This controls how far outside of an amplicon boundary an alignment can be while still being considered a match to the primer. This is useful to control for instances where reads are not adapter/barcode trimmed (or incompletely trimmed) and these extra bases have some degree of homology with the reference leading to alignments extending beyond the amplicon boundary.</sub>
+
 ---
 
 ### Friday, February 20, 2026
-- continue to work on nf-viroflow, check parameter and verify the results of the workflow step by step from mapping to consensus calling
+- Continued nf-viroflow development
+- Step-by-step parameter verification from mapping to consensus calling
+
 ---
 
-## week 4
+## Week 4 (Feb 23-27)
 
-### Monday February 23, 2026
+### Monday, February 23, 2026
 
-- Group meeting
-  - asked petya about how she processed mpox. she is using viralrecon in the same way as we did for rsv data
-- work on rsv workflow with the new implemented viroflow pipeline
-  - make_summary_report.py has problems becuase nextclade seqName is not mathing chromosome_coverage_depth_summary.tsv
+#### Group Meeting
+- Asked Petya about mpox processing - she uses viralrecon, same approach as RSV data
+
+#### RSV Workflow Development
+- Working on RSV workflow with newly implemented viroflow pipeline
+- **Issue identified**: `make_summary_report.py` failing because Nextclade seqName doesn't match `chromosome_coverage_depth_summary.tsv`
+
 ---
 
-### Tuesday February 24, 2026
-- working on integrating viroflow to rsv-analayzer
-- in henry wong's paper, there is a supplimentary table, there are 27 pairs primers but the bed file we got from them has 26 pairs.
-- the coordinates in kingston's bed file are a bit off from the actually bam file coordinates. I used plsa bed file, the coordinates are more consistent with the bam coorindates
-- in the
-- reanalized the nanopore ligation samples with viroflow:
+### Tuesday, February 24, 2026
 
-  ```
-  Barcode	RSVA_1	RSVA_17	RSVA_18	RSVA_20	RSVA_26
-  barcode02	0	37	2	6	3
-  barcode03	0	145	9	15	19
-  barcode04	0	558	9	27	239
-  barcode05	0	23	1	1	3
-  barcode06	0	834	19	50	577
-  barcode07	0	484	2	66	3
-  barcode09	0	430	9	43	23
-  barcode29	1	139	61	118	170
-  barcode30	0	4	1	2	7
-  barcode31	0	500	11	21	319
-  barcode33	0	645	13	97	43
-  barcode35	0	674	6	96	16
-  barcode37	0	8	0	0	0
-  barcode39	0	5	0	1	2
-  barcode57	0	2	0	2	0
-  barcode68	0	0	0	0	2
-  barcode69	0	1743	41	105	619
-  barcode70	0	750	4	129	18
-  barcode71	0	956	15	153	24
-  barcode72	0	974	124	131	26
-  barcode73	0	431	2	51	19
-  barcode74	0	32	34	105	89
-  barcode76	0	1427	85	91	47
-  barcode77	213	160	693	1609	2714
-  barcode78	0	90	7	85	45
-  barcode79	0	0	0	0	0
-  barcode80	0	904	51	74	40
-  barcode81	0	1786	146	206	44
-  barcode82	0	78	1	6	15
-  barcode83	0	755	105	101	20
-  barcode84	1	408	73	59	21
-  barcode85	0	180	1	23	5
-  barcode86	0	0	0	0	0
-  barcode87	0	94	15	14	3
-  barcode88	1	470	96	67	24
-  barcode90	0	59	40	160	119
-  barcode91	0	696	16	42	59
-  barcode92	1	2245	135	352	71
-  barcode94	0	584	9	29	212
-  ```
-- in the viralrecon, make sure we did not filter out duplicates, then I used options "-ff UNMAP,SECONDARY,QCFAIL"
+#### RSV-Analyzer Integration
+- Working on integrating viroflow into rsv-analyzer
+- **Primer discrepancy**: Henry Wong's paper supplementary table lists 27 primer pairs, but BED file contains only 26 pairs
+- **Coordinate issues**: Kingston's BED file coordinates slightly off from actual BAM file coordinates
+  - Switched to PLSA BED file - coordinates more consistent with BAM coordinates
+- **Reanalysis**: Nanopore ligation samples with viroflow
 
-### Feburary 25, 2026
-- working on reanalyze illumina orignal sequence data with modified parameters "-ff UNMAP,SECONDARY,QCFAIL", also, viralrecon can only accept 6 col bed file
-### Feb. 26, 2026
-- rsv-analyzer:
-- merge the summary tables from illumina orig, nanopore ligation, nanopore rapid
-- illumina, nanopore ligation have much deeper sequence depth comparing to nanopore rapid but the completeness of the rapid is not too bad. it is a little low but the lower completness was mainly caused by drop of a few amplicons. such as 1, 18, and 26,
-- for amplicon1, all the samples get zero depth but sample 77 has a good depth
+**Amplicon read counts by barcode:**
+
+| Barcode | RSVA_1 | RSVA_17 | RSVA_18 | RSVA_20 | RSVA_26 |
+|---------|--------|---------|---------|---------|---------|
+| barcode02 | 0 | 37 | 2 | 6 | 3 |
+| barcode03 | 0 | 145 | 9 | 15 | 19 |
+| barcode04 | 0 | 558 | 9 | 27 | 239 |
+| barcode05 | 0 | 23 | 1 | 1 | 3 |
+| barcode06 | 0 | 834 | 19 | 50 | 577 |
+| barcode07 | 0 | 484 | 2 | 66 | 3 |
+| barcode09 | 0 | 430 | 9 | 43 | 23 |
+| barcode29 | 1 | 139 | 61 | 118 | 170 |
+| barcode30 | 0 | 4 | 1 | 2 | 7 |
+| barcode31 | 0 | 500 | 11 | 21 | 319 |
+| barcode33 | 0 | 645 | 13 | 97 | 43 |
+| barcode35 | 0 | 674 | 6 | 96 | 16 |
+| barcode37 | 0 | 8 | 0 | 0 | 0 |
+| barcode39 | 0 | 5 | 0 | 1 | 2 |
+| barcode57 | 0 | 2 | 0 | 2 | 0 |
+| barcode68 | 0 | 0 | 0 | 0 | 2 |
+| barcode69 | 0 | 1743 | 41 | 105 | 619 |
+| barcode70 | 0 | 750 | 4 | 129 | 18 |
+| barcode71 | 0 | 956 | 15 | 153 | 24 |
+| barcode72 | 0 | 974 | 124 | 131 | 26 |
+| barcode73 | 0 | 431 | 2 | 51 | 19 |
+| barcode74 | 0 | 32 | 34 | 105 | 89 |
+| barcode76 | 0 | 1427 | 85 | 91 | 47 |
+| barcode77 | 213 | 160 | 693 | 1609 | 2714 |
+| barcode78 | 0 | 90 | 7 | 85 | 45 |
+| barcode79 | 0 | 0 | 0 | 0 | 0 |
+| barcode80 | 0 | 904 | 51 | 74 | 40 |
+| barcode81 | 0 | 1786 | 146 | 206 | 44 |
+| barcode82 | 0 | 78 | 1 | 6 | 15 |
+| barcode83 | 0 | 755 | 105 | 101 | 20 |
+| barcode84 | 1 | 408 | 73 | 59 | 21 |
+| barcode85 | 0 | 180 | 1 | 23 | 5 |
+| barcode86 | 0 | 0 | 0 | 0 | 0 |
+| barcode87 | 0 | 94 | 15 | 14 | 3 |
+| barcode88 | 1 | 470 | 96 | 67 | 24 |
+| barcode90 | 0 | 59 | 40 | 160 | 119 |
+| barcode91 | 0 | 696 | 16 | 42 | 59 |
+| barcode92 | 1 | 2245 | 135 | 352 | 71 |
+| barcode94 | 0 | 584 | 9 | 29 | 212 |
+
+- **Viralrecon parameter update**: Ensured duplicates not filtered out, used options `-ff UNMAP,SECONDARY,QCFAIL`
+
+---
+
+### Wednesday, February 25, 2026
+- Reanalyzed Illumina original sequence data with modified parameters `-ff UNMAP,SECONDARY,QCFAIL`
+- **Note**: Viralrecon only accepts 6-column BED files
+
+---
+
+### Thursday, February 26, 2026
+
+#### RSV-Analyzer Summary
+- Merged summary tables from:
+  - Illumina original
+  - Nanopore ligation
+  - Nanopore rapid
+
+**Key Findings:**
+- Illumina and Nanopore ligation: Much deeper sequencing depth compared to Nanopore rapid
+- Nanopore rapid completeness: Slightly lower but acceptable
+  - Lower completeness mainly caused by dropout of specific amplicons (1, 18, and 26)
+- **Amplicon 1 observations**: 
+  - All samples show zero depth
+  - Exception: Sample 77 has good depth
+
+---
