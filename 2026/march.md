@@ -10,7 +10,13 @@
 ### Thursday, March 5, 2026
 
 #### mpox analysis
-[A guide to sequencing for genomic epidemiology](https://artic.network/viruses/mpxv/artic-mpxv-guide.html)
+[A guide to sequencing for genomic epidemiology](https://artic.network/viruses/mpxv/artic-mpxv-guide.html) 
+
+
+![41392_2023_1675_Fig3_HTML](https://github.com/user-attachments/assets/2ded63c6-a0d9-4388-9228-6cf0b0536eb8)
+
+The genome structure and potential antiviral targets of Mpox virus. The Mpox virus genome consists of a double-stranded linear DNA comprising approximately 196,858 base pairs. It consists of a central recognition region, two variable region, and two terminal inverted terminal repeats (ITRs) (Monkeypox virus strain Zaire, GenBank accession number: AF380138.1, web link: https://www.ncbi.nlm.nih.gov/nuccore/17529780). In the genome map, target genes implicated in the interaction between Mpox virus and antiviral drugs are listed. Most essential genes are located in the central region of the genome
+
 - background reading
   - Mpox virus is a large double-stranded DNA virus (~200 kb). wgs is more challenging than for small RNA virus because of genome size, repoeats, and terminal regions
   - It has low GC content of ~33% which tranlates to a higher frequency of A/T hompolymeric tract regions. nanopore R9 chemistry is poor at resovling homopolymeric tracts above 6 bps, R10 is better and can be reliable up to around 9-10 bps
