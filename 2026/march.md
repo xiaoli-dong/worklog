@@ -9,7 +9,7 @@
 
 ### Thursday, March 5, 2026
 
-#### mpox analysis
+
 [A guide to sequencing for genomic epidemiology](https://artic.network/viruses/mpxv/artic-mpxv-guide.html) 
 
 
@@ -17,7 +17,7 @@
 
 The genome structure and potential antiviral targets of Mpox virus. The Mpox virus genome consists of a double-stranded linear DNA comprising approximately 196,858 base pairs. It consists of a central recognition region, two variable region, and two terminal inverted terminal repeats (ITRs) (Monkeypox virus strain Zaire, GenBank accession number: AF380138.1, web link: https://www.ncbi.nlm.nih.gov/nuccore/17529780). In the genome map, target genes implicated in the interaction between Mpox virus and antiviral drugs are listed. Most essential genes are located in the central region of the genome
 
-- background reading
+- mpox NGS data anaysis background reading
   - Mpox virus is a large double-stranded DNA virus (~200 kb). wgs is more challenging than for small RNA virus because of genome size, repoeats, and terminal regions
   - It has low GC content of ~33% which tranlates to a higher frequency of A/T hompolymeric tract regions. nanopore R9 chemistry is poor at resovling homopolymeric tracts above 6 bps, R10 is better and can be reliable up to around 9-10 bps
   - MPXV genome contains a large (6.5 - 17.5 kb) ITR (inverted tandem repeat) at each end of the genome
@@ -30,5 +30,8 @@ The genome structure and potential antiviral targets of Mpox virus. The Mpox vir
       - for nanopore amplicon sequecne data generated with the ARTIC protocol or with the ARTIC protocol using the rapid kit , recommend using fieldbioinformatics 1.4.0
       - for illumina amplicon sequence, the artic team recommend using [artic-mpxv-illumina-nf](https://github.com/artic-network/artic-mpxv-illumina-nf) which is an EPI3ME wrapper for the [BCCDC's illumina amplicon bioinformatics pipeline](https://github.com/BCCDC-PHL/mpxv-artic-nf)
       - other options: An overview of some other options for bioinformatics pipelines can be found at the PHA4GE Github: [https://github.com/pha4ge/pipeline-resources/blob/main/docs/mpxv-bioinfo-solutions.md](https://github.com/pha4ge/pipeline-resources/blob/main/docs/mpxv-bioinfo-solutions.md)
-      - phylogenetic reconstruction: mask the parts of genomes that are likely to contain errors, particularly low-complexity and repetitive areas. [Squirrel](https://artic.network/software/squirrel) provides best-practice MPXV phylogenetics and APOBEC3-reconstruction. 
+      - phylogenetic reconstruction: mask the parts of genomes that are likely to contain errors, particularly low-complexity and repetitive areas. [Squirrel](https://artic.network/software/squirrel) provides best-practice MPXV phylogenetics and APOBEC3-reconstruction.
+
+- Our mpox data has been analyzed using pipelines and procedures originally put together by Petya. At the moment, two workflows are available: the viral pipeline developed by Vince and the viralrecon pipeline.
+After reviewing current recommendations and community practices, the ARTIC pipeline appears to be the preferred approach for mpox analysis. It follows a workflow similar to the COVID analysis pipelines, which would help maintain consistency and make it easier to compare and share results across groups. However, the original ARTIC pipelines from both BCCDC and the ARTIC repository were not running successfully due to issues related to Hostile. I made a small modification to the illumina.nf script, and after adjusting a few lines the pipeline was able to run successfully.
 ---
