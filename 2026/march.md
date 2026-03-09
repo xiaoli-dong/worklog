@@ -42,3 +42,13 @@ After reviewing current recommendations and community practices, the ARTIC pipel
 - met Tarah to discuss about the generic pipelne:
   - if a well developed pipeline exists for an organism, we can use it for easy data sharing, standadize the procedure. if not , we will use our generic pipeline
   - for the mpox, we will use artic pipeline
+ 
+### Monday, March 9, 2026
+
+- Group meeting:
+  - cyber security
+  - house keeping:
+    - eMag training, star problems
+    - flu nanopore vs illumina, when using nanopore, pcr is not as robust as illumina and getting lower completeness
+    - fluab is now inside the pipline launcher, need to know how to run it
+  - NGS: measele is using BCCDC's without changing, flu will use newer primer, which is needed to be added to the pipeline
