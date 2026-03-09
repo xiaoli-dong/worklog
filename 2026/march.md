@@ -52,3 +52,13 @@ After reviewing current recommendations and community practices, the ARTIC pipel
     - flu nanopore vs illumina, when using nanopore, pcr is not as robust as illumina and getting lower completeness
     - fluab is now inside the pipline launcher, need to know how to run it
   - NGS: measele is using BCCDC's without changing, flu will use newer primer, which is needed to be added to the pipeline
+- artic mpxv pipeline continue
+  - nanopore pipeline is not working because of the clair3 modelp
+    ```
+    # nanopore
+    align_trim --normalise 200 ./store_dir/primer-schemes/bccdc-mpox/2500/v2.3.0/primer.bed --primer-match-threshold 35 --min-mapq 20 --remove-incorrect-pairs --trim-primers --report fastq.alignreport.csv --amp-depth-report fastq.amplicon_depths.tsv < fastq.sorted.bam > fastq.primertrimmed.rg.sam
+  
+    #Illumina
+    align_trim.py --normalise 200  primer.bed --paired --no-read-groups --primer-match-threshold 35 --min-mapq 20 --trim-primers --report 115_S115_L001.alignreport.csv --amp-depth-report 115_S115_L001.amplicon_depths.tsv < 115_S115_L001.sorted.bam 2> 115_S115_L001.alignreport.er | samtools sort -T 115_S115_L001 - -o 115_S115_L001.primertrimmed.rg.sorted.bam && samtools index 115_S115_L001.primertrimmed.rg.sorted.bam
+    ```
+- 
