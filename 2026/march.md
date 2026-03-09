@@ -35,3 +35,10 @@ The genome structure and potential antiviral targets of Mpox virus. The Mpox vir
 - Our mpox data has been analyzed using pipelines and procedures originally put together by Petya. At the moment, two workflows are available: the viral pipeline developed by Vince and the viralrecon pipeline.
 After reviewing current recommendations and community practices, the ARTIC pipeline appears to be the preferred approach for mpox analysis. It follows a workflow similar to the COVID analysis pipelines, which would help maintain consistency and make it easier to compare and share results across groups. However, the original ARTIC pipelines from both BCCDC and the ARTIC repository were not running successfully due to issues related to Hostile. I made a small modification to the illumina.nf script, and after adjusting a few lines the pipeline was able to run successfully.
 ---
+
+### Friday, March 6, 2026
+
+- worked on testing artic pipeline for nanopore data
+- met Tarah to discuss about the generic pipelne:
+  - if a well developed pipeline exists for an organism, we can use it for easy data sharing, standadize the procedure. if not , we will use our generic pipeline
+  - for the mpox, we will use artic pipeline
