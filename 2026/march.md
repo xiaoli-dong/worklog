@@ -94,7 +94,8 @@ align_trim.py --normalise 200 primer.bed --paired --no-read-groups \
   - The `squirrel` version in the pipeline was **1.0.12**. Some parameters described in the paper were missing, and the tree-building process crashed.
     - Updated `squirrel` to **1.3.2**, which resolved the issue.
     - **Example command**
-    ```
+    
+    ```bash
     squirrel all_consensus.fasta \
       -o xiaoli \
       --clade split \
