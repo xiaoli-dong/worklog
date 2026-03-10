@@ -83,6 +83,23 @@ align_trim.py --normalise 200 primer.bed --paired --no-read-groups \
 - **Continued testing of the ARTIC Nanopore mpox pipeline**
 
   - The original pipeline did not work under the `singularity` profile. Docker cannot be tested in our current environment.
+  - The orginal configuration for artic pipeline is not working because it did not contain run_clair3.sh program and I changed it to artic pipeline container instead of filedbioinformatics
+    ```
+    # original one
+    withLabel: artic {
+        container = "quay.io/artic/fieldbioinformatics:1.7.3"
+        memory    = { 4.GB * task.attempt }
+        conda     = "bioconda::artic=1.7.3"
+    }
+
+    # new one
+    withLabel: artic {
+        container = "https://depot.galaxyproject.org/singularity/artic%3A1.8.5--pyhdfd78af_0"
+        memory    = { 4.GB * task.attempt }
+        conda     = "bioconda::artic=1.8.5"
+    }
+    ```
+    I 
   - Added a `singularity` profile to `nextflow.config`.
   - Added an `override_model_dir` parameter because ARTIC MinION could not access the model files under the Singularity profile.
     - The default `--model-dir` is located at:
@@ -90,7 +107,7 @@ align_trim.py --normalise 200 primer.bed --paired --no-read-groups \
       $CONDA_PREFIX/bin/models/
       ```
     - However, the pipeline could not access this directory when running inside the container.
-    - Downloaded the models manually and used `--override_model_dir` to provide the directory path to the pipeline.
+    - Downloaded the models manually using artic_get_models and used `--override_model_dir` to provide the directory path to the pipeline.
   - The `squirrel` version in the pipeline was **1.0.12**. Some parameters described in the paper were missing, and the tree-building process crashed.
     - Updated `squirrel` to **1.3.2**, which resolved the issue.
     - **Example command**
@@ -121,3 +138,6 @@ nextflow run ../main.nf \
   --override_model_dir /nfs/Genomics_DEV/projects/xdong/deve/examples_pipelines/artic-mpxv-nf-2.1.0/test/model
 -resume 
 ```
+- Develope a working version of the /artic-network/artic-mpxv-nf pipeline
+- download pipeline: https://github.com/artic-network/artic-mpxv-nf/archive/refs/tags/2.1.0.tar.gz
+- tested the nanopore pipeine with new updated artic and squirrel software and it works successfuly
