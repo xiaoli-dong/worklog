@@ -42,23 +42,81 @@ After reviewing current recommendations and community practices, the ARTIC pipel
 - met Tarah to discuss about the generic pipelne:
   - if a well developed pipeline exists for an organism, we can use it for easy data sharing, standadize the procedure. if not , we will use our generic pipeline
   - for the mpox, we will use artic pipeline
- 
+
+## Week 2
+
 ### Monday, March 9, 2026
 
-- Group meeting:
-  - cyber security
-  - house keeping:
-    - eMag training, star problems
-    - flu nanopore vs illumina, when using nanopore, pcr is not as robust as illumina and getting lower completeness
-    - fluab is now inside the pipline launcher, need to know how to run it
-  - NGS: measele is using BCCDC's without changing, flu will use newer primer, which is needed to be added to the pipeline
-- artic mpxv pipeline continue
-  - nanopore pipeline is not working because of the clair3 modelp
+- **Group meeting**
+  - Cyber security
+  - Housekeeping:
+    - eMag training; some STAR issues
+    - Flu Nanopore vs Illumina: when using Nanopore, PCR is not as robust as with Illumina, resulting in lower genome completeness
+    - `fluab` is now integrated into the pipeline launcher; need to learn how to run it
+  - NGS updates:
+    - Measles pipeline is using the BCCDC workflow without modification
+    - Flu will use a newer primer scheme, which needs to be added to the pipeline
+
+- **ARTIC mpox Nanopore pipeline testing (continued)**
+  - Testing `align_trim` parameters in the ARTIC pipeline for mpox data
+
+```bash
+# Nanopore
+align_trim --normalise 200 ./store_dir/primer-schemes/bccdc-mpox/2500/v2.3.0/primer.bed \
+  --primer-match-threshold 35 --min-mapq 20 --remove-incorrect-pairs --trim-primers \
+  --report fastq.alignreport.csv \
+  --amp-depth-report fastq.amplicon_depths.tsv \
+  < fastq.sorted.bam > fastq.primertrimmed.rg.sam
+
+# Illumina
+align_trim.py --normalise 200 primer.bed --paired --no-read-groups \
+  --primer-match-threshold 35 --min-mapq 20 --trim-primers \
+  --report 115_S115_L001.alignreport.csv \
+  --amp-depth-report 115_S115_L001.amplicon_depths.tsv \
+  < 115_S115_L001.sorted.bam 2> 115_S115_L001.alignreport.err \
+  | samtools sort -T 115_S115_L001 - -o 115_S115_L001.primertrimmed.rg.sorted.bam \
+  && samtools index 115_S115_L001.primertrimmed.rg.sorted.bam
+```
+
+### Tuesday, March 10, 2026 (Sunny)
+
+- **Continued testing of the ARTIC Nanopore mpox pipeline**
+
+  - The original pipeline did not work under the `singularity` profile. Docker cannot be tested in our current environment.
+  - Added a `singularity` profile to `nextflow.config`.
+  - Added an `override_model_dir` parameter because ARTIC MinION could not access the model files under the Singularity profile.
+    - The default `--model-dir` is located at:
+      ```
+      $CONDA_PREFIX/bin/models/
+      ```
+    - However, the pipeline could not access this directory when running inside the container.
+    - Downloaded the models manually and used `--override_model_dir` to provide the directory path to the pipeline.
+  - The `squirrel` version in the pipeline was **1.0.12**. Some parameters described in the paper were missing, and the tree-building process crashed.
+    - Updated `squirrel` to **1.3.2**, which resolved the issue.
+    - **Example command**
     ```
-    # nanopore
-    align_trim --normalise 200 ./store_dir/primer-schemes/bccdc-mpox/2500/v2.3.0/primer.bed --primer-match-threshold 35 --min-mapq 20 --remove-incorrect-pairs --trim-primers --report fastq.alignreport.csv --amp-depth-report fastq.amplicon_depths.tsv < fastq.sorted.bam > fastq.primertrimmed.rg.sam
-  
-    #Illumina
-    align_trim.py --normalise 200  primer.bed --paired --no-read-groups --primer-match-threshold 35 --min-mapq 20 --trim-primers --report 115_S115_L001.alignreport.csv --amp-depth-report 115_S115_L001.amplicon_depths.tsv < 115_S115_L001.sorted.bam 2> 115_S115_L001.alignreport.er | samtools sort -T 115_S115_L001 - -o 115_S115_L001.primertrimmed.rg.sorted.bam && samtools index 115_S115_L001.primertrimmed.rg.sorted.bam
+    squirrel all_consensus.fasta \
+      -o xiaoli \
+      --clade split \
+      --seq-qc \
+      --run-apobec3-phylo \
+      --tree-file xiaoli_tree \
+      --include-background \
+      --outfile xiaoli_all_consensus.aln.fasta \
+      --tempdir xiaoli_squirrel_tmp \
+      -t 4
     ```
-- 
+  - When running the pipeline, `override_model_dir` must be provided as an **absolute path**.
+
+- **Example command**
+
+```bash
+nextflow run ../main.nf \
+  --fastq ./fastq \
+  --scheme_version bccdc-mpox/2500/v2.3.0 \
+  --clade split \
+  -profile singularity \
+  --override_model r941_prom_sup_g5014 \
+  --override_model_dir /nfs/Genomics_DEV/projects/xdong/deve/examples_pipelines/artic-mpxv-nf-2.1.0/test/model
+-resume 
+```
