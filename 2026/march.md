@@ -139,5 +139,50 @@ nextflow run ../main.nf \
 -resume 
 ```
 - Develope a working version of the /artic-network/artic-mpxv-nf pipeline
-- download pipeline: https://github.com/artic-network/artic-mpxv-nf/archive/refs/tags/2.1.0.tar.gz
-- tested the nanopore pipeine with new updated artic and squirrel software and it works successfuly
+  - download pipeline: https://github.com/artic-network/artic-mpxv-nf/archive/refs/tags/2.1.0.tar.gz
+  - tested the nanopore pipeine with new updated artic 1.8.9 and squirrel software v1.3.2 and it works successfuly
+---
+
+### Wednesday, March 11, 2026, sunny day
+
+- Reading squirreel papger:
+  - [Pathoplexus is a new open-source database](https://pathoplexus.org/) that makes it easier for researchers and public health workers to share, review, and act on viral pathogen genomic data.
+  - By default, squirrel masks out regions of the MPXV genome that are known to be challenging to assemble or align. Additional community resources provide complementary masking guidance, such as the mask file maintained by the International Pathogen urveillance Network hosted at [collaboratory-mpox-genomics-phylomasking](github.com/WHO-Collaboratory/collaboratory-mpox-genomics-phylomasking). Importantly, we recommend that users do not automatically exclude all sites flagged by squirrel.
+  - Clade assignment within squirrel was introduced in order to allow users to input data from a sequencing run with multiple clades, without needing the user to manually split the sequence file by clade, which could result in user error.
+  - The classifier is robust to increasing diversity, well beyond within-clade diversity; however, model accuracy declines with increasing ambiguity, as informative sites are missing. We therefore recommend a 20% ambiguity cut off for accurate clade
+  assignment, which aligns with the cut off imposed in Nextclade.
+- develop a working version of artic mpxv pipeline for both illumina and nanopore data
+  because the nanopore version of the pipeline does ot have qc modules, the qc modules in illumina pipeline is buggy, let's do the reads qc using nf-qcflow and then we skip deshot and trimming functions in illumina pipeline 
+  - Illumina version
+    - downloaded newest version of the pipeline
+    - added local configuration to conf directory: signularity profile configuration
+    - added "skip_read_trimming" params
+    - upgraded squirrel to 1.3.2
+    - configured slurm profile
+    - Example command
+      ```
+      nextflow run ../main.nf --directory fastq --scheme_name bccdc-mpox/2500/v2.3.0 --outdir results -profile singularity --clade cladeiib --prefix artic_test -resume
+      ```
+  - nanopore version
+    - developed a working version with slurm profie.
+  - both pipeines are sitting under deve directory
+---
+
+### Thursday, March 12, 2026, Snow day
+- double check squirrel analysis results, for illuina testing out,
+  - it seems the clade assignment for sample 116 is uncertain, 
+    ```
+    taxon,prediction,score,imputation_score,non_zero_ids,non_zero_scores,designated
+    115_S115_L001,IIb,1.0,0.9894765164877873,IIb,1.0,
+    116_S116_L001,Ib,0.8333333333333334,0.9363228699551569,IIa;Ib,0.16666666666666666;0.8333333333333334,
+    ```
+  - is it possible that when we run artic pipeline, we needed to provide clade information, with out the knowledge, we provide cladeiib. is it possible that data is cladeib but we used cladeii reference in the analysis, then consensus quality is not good.
+  - Based on the above observation, I downloaded [the representative background set of genomes from each clade](https://github.com/aineniamh/squirrel/blob/main/squirrel/data/background.panel.fasta) defined in sequrrel paper, created mash sketh file then used mash screen to check which clade the sample contains. with mash screen, 116 sample belong to cladeib 
+    ```
+    mash sketch -i background.panel.fasta -o background.panel.fasta.msh
+    mash   screen -i 0.95 -w -v 0.1 -p 6 background.panel.fasta.msh fastq/116_S116_L001_R1_001.fastq.gz fastq/116_S116_L001_R2_001.fastq.gz > 116.screen
+
+    Singularity> more 116.screen 
+    0.999618        992/1000        2950    0       PP601212.1      clade=CladeIb
+    ```
+- Start to work on mpox-analyzer pipeline
