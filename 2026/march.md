@@ -186,3 +186,50 @@ nextflow run ../main.nf \
     0.999618        992/1000        2950    0       PP601212.1      clade=CladeIb
     ```
 - Start to work on mpox-analyzer pipeline
+  - illuma pipeline is developed and tested, and it is working
+---
+
+### Friday, March 13, 2026, Snow day
+- Timesheet PP07 is due
+- Made request for creating linux account for Jenna and she needs to run pipline launcher
+- continuing working on mpox-analyzer - nanopore portion
+  - Nanopore pipeline
+    ```
+    sh ../../script/mpox_nanopore_pipeline.sh samplesheet.csv results
+    ```
+- Mpox recombinant strain (Clade 1b + 2b)
+  - [Mpox: recombinant virus with genomic elements of clades Ib and IIb - Global](https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON595)
+  - [Inter-Clade Recombinant Mpox Virus Detected in England in a Traveller Recently Returned from Asia](https://virological.org/t/inter-clade-recombinant-mpox-virus-detected-in-england-in-a-traveller-recently-returned-from-asia/1015/1)
+  - downloaded recombinant consensus [GCA_977880215.1](https://www.ebi.ac.uk/ena/browser/view/GCA_977880215.1)
+    - test to see whether squirrel with --clade split option can correctly classify it (lab test result as cladeI), squirrel assigned it to cladeiib but with low score:
+      - squirrel cannot take gz file,
+      - squirrel crashes with headline of the input fasta as: ">ENA|OZ375330|OZ375330.1 Monkeypox virus isolate MPXV_UK_2025_GD25-156 genome assembly, chromosome: 1"
+      - renamed the head to ">ENA|OZ375330|OZ375330.1", the squirrel finished
+      ```
+      #cmd
+      squirrel test.fasta       -o xiaoli       --clade split       --seq-qc       --run-apobec3-phylo       --tree-file xiaoli_tree       --include-background       --outfile xiaoli_test.aln.fasta       --tempdir xiaoli_squirrel_tmp       -t 4
+
+      more xiaoli/assignment_report.csv 
+      taxon,prediction,score,imputation_score,non_zero_ids,non_zero_scores,designated
+      ENA|OZ375330|OZ375330.1,IIb,0.5,0.9579813798631235,IIb,0.5,
+      ```
+      - check wheter nextclade can correctly classify the clade, it calssified it as recombinant. 
+
+      ```
+      nextclade run test.fasta --input-dataset ../illumina/nextstrain/mpox/all-clades --output-all nextclade
+      # nextclade identified the consensus as
+      0       ENA|OZ375330|OZ375330.1 Ib/IIb          recombinant  
+      ```
+      - based on the testing, nextclade is necessary to be included in the pipeline although squirrel can also do the clade assignment
+  ---
+
+  ### Monday,
+  - Group meeting
+  - Bioniformatics meeting
+  - Test mpox-analyzer: added --completenss to the command line , this is the genome completeness cutoff for doing phylogenectic analyiss and clade assignment for using squirrel and nextclade, the recommended cutoff (as default) is 0.8
+  - validate the new mpox pipeline
+---
+
+### Tuesday, March 17, 2026
+- Prepare rsv-analyzer meeting:
+- 
