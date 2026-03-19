@@ -254,3 +254,10 @@ nextflow run ../main.nf \
     240124_S_N_020,ONT Rapid Barcoding Kit
     240124_S_N_021,ONT Ligation Kit
   ```
+### Thursday, March 19, 2026, Sunny
+- process the rsv data sequences with kingston's primers
+  - clean up bed files
+- mpox pipeline validation
+  - working on summary report modules
+  - add covflow to the pipeline
+- submitted transcript to ierf for evaluation
