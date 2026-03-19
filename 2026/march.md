@@ -231,5 +231,26 @@ nextflow run ../main.nf \
 ---
 
 ### Tuesday, March 17, 2026
-- Prepare rsv-analyzer meeting:
+- rsv-analyzer meeting:
+  - meeting take away:
+    - Anita works on primers to see how to improve the dropped amplicon efficiency
+    - Some of the original runs were amplified using kinston's primer and it may have primer 27, Anital is going to send me the run name, I will do some analysis
+    - process illumina rapid protocol and add it to the excel sheet and share with the group
+---
 
+### Wednesdqy, March 18, 2026
+- following up with the rsv-analyzer meeting yesterday
+  - deliveried illumina (rapid, original) and nanopore (ligation, rapid) analysis comparison tables
+  - Receiverd emails: three primers were missing in wetlab, they have ordered them, in the bed file I preparied, I had primer 27 in the bed file. added RSVB_750_9_RIGHT2 to bed file
+  ```
+    RSVA_750_27_LEFT,TCATAGGTGAAGGAGCAGGGAA,1
+    RSVA_750_27_RIGHT,GCTGAAAACTTCATTACGTCCAGC,1
+    RSVB_750_9_RIGHT2,GAGTCTCTTTTGTTTGTTTTGGT,1
+  ```
+  - The following runs would have been done with the primer pools from Kingston. Would you be able to analyze and see if amplicon 27 for RSV A works well, and if amplicon 9 for RSV B is improved?
+  ```
+    231219_S_N_391,ONT Ligation Kit
+    231221_S_N_392,ONT Rapid Barcoding Kit
+    240124_S_N_020,ONT Rapid Barcoding Kit
+    240124_S_N_021,ONT Ligation Kit
+  ```
