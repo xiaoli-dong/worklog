@@ -261,3 +261,8 @@ nextflow run ../main.nf \
   - working on summary report modules
   - add covflow to the pipeline
 - submitted transcript to ierf for evaluation
+
+### Monday to Friday: March 23-27, 2026
+- consolidate rsv-analyzer, nf-viroflow, deploy 0.1.2 to proudct dir, updated SOP
+- work on mpox pipeline
+- 
