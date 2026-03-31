@@ -265,4 +265,20 @@ nextflow run ../main.nf \
 ### Monday to Friday: March 23-27, 2026
 - consolidate rsv-analyzer, nf-viroflow, deploy 0.1.2 to proudct dir, updated SOP
 - work on mpox pipeline
-- 
+
+---
+### Monday March 30, 2026
+- Group meeting:
+  - Pipeline launcher for fluAB is still not working
+  - rsv-analyzer and partially developed viroflow were uploaded to the prodcution dir, sop was updated, need someone to test it before we switch
+- CAP meeting:
+  - CAP internal audit on May 27, 2026, Wednesday
+  - bioinformatics:
+    - implement competency procedures for bioinformatics:
+      - Linux basic
+      - Slurm basic
+      - Pipeline launcher
+      - Software tracker (development and production)
+- brelia ospC: kevin drop by and he said he is interested in three aspects: unique to alberta; where they came from, not all ticks affect human. They have location data.
+- working on consolidate mpox-analyzer
+-   
