@@ -281,4 +281,6 @@ nextflow run ../main.nf \
       - Software tracker (development and production)
 - brelia ospC: kevin drop by and he said he is interested in three aspects: unique to alberta; where they came from, not all ticks affect human. They have location data.
 - working on consolidate mpox-analyzer
--   
+### Tuesday March 31, 2026
+- continue working on mpox pipeline
+- helped jenna with server access and on how to learn linux
