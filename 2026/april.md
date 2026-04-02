@@ -3,8 +3,14 @@
 
 ## April 2, 2026
 
-- mpox
-- meeting tarah
+- mpox-analyzer developing
+- meeting tarah to discuss mpox analysis for jamil's paper
 - proble capture meeting with Ashlyn kirk and andrew cameon
   - expired reagents can be used
-  - kits used in plsa: nextera, dna prep kit , flow cell, 300x sequencing , reagents: hybrid, universal blocking
+  - kits used in plsa: nextera, Illumina DNA Prep
+  - regina using 300x sequencing , reagents: hybridization, universal blocking
+  - what type of the samples: 8 samples in one pool capture, trying 12x
+  - vsp panel from illumina , not working well for complex samples
+  - sensentivity is viral dependent,
+  - illumina has a nice ribosome kitto depelete robsom rRNA, upstream to get rid of is not working well, universal also binding to human ribosome and bind to adapter
+- 
