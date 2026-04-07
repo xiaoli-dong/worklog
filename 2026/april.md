@@ -14,3 +14,11 @@
   - sensentivity is viral dependent,
   - illumina has a nice ribosome kitto depelete robsom rRNA, upstream to get rid of is not working well, universal also binding to human ribosome and bind to adapter
 - 
+## Monday, April 6, 2026
+- Group meeting: cap, quality 
+- work on mpox
+
+### Tuesday, April 7, 2026, Sunny
+- mpxv-analyzer testing
+- mpxv-analyzer SOP draft
+- 
