@@ -26,3 +26,16 @@
 - sick day
 ### Thursday, April 9, 2027
 - clean up home directories across all the nodes on the server and redirected some of the dot files to path/project/xdong
+- WGU readship
+  - tuition discount: full time employee, membership
+  - apply for scholarships
+- rsv pipeline failed because the pipeline failed to get includeConfig 'https://raw.githubusercontent.com/nf-core/configs/master/nfcore_custom.config', the ahs is blocking it. I added the following optons to the sbatch script to run the nextflow pipeline offline:
+  ```
+    # ======================================
+    # Environment setup
+    # ======================================
+    # ahs is blocking download nfcore_custom.config at the run time
+    # https://raw.githubusercontent.com/nf-core/configs/master/nfcore_custom.config
+    #so run the pipeline in offline mode
+    export NXF_OFFLINE='true'
+  ```
