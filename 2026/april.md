@@ -21,4 +21,8 @@
 ### Tuesday, April 7, 2026, Sunny
 - mpxv-analyzer testing
 - mpxv-analyzer SOP draft
-- 
+
+### Wednesday, April 8, 2026
+- sick day
+### Thursday, April 9, 2027
+- clean up home directories across all the nodes on the server and redirected some of the dot files to path/project/xdong
