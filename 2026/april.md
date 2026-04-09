@@ -29,6 +29,7 @@
 - WGU readship
   - tuition discount: full time employee, membership
   - apply for scholarships
+  - accept enrollment by April 15 and finiance deadline April 22
 - rsv pipeline failed because the pipeline failed to get includeConfig 'https://raw.githubusercontent.com/nf-core/configs/master/nfcore_custom.config', the ahs is blocking it. I added the following optons to the sbatch script to run the nextflow pipeline offline:
   ```
     # ======================================
@@ -39,3 +40,6 @@
     #so run the pipeline in offline mode
     export NXF_OFFLINE='true'
   ```
+- rsv pipeline bug fixing:
+  - when making the summary report, the nextclade path for rsvB was wrong, put in "nextclade/nextclade/nextcalde.tsv" instead of "nextclade/nextclade.tsv".
+  - updating the results for testing dataset under "testdata" dir
