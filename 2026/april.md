@@ -43,3 +43,8 @@
 - rsv pipeline bug fixing:
   - when making the summary report, the nextclade path for rsvB was wrong, put in "nextclade/nextclade/nextcalde.tsv" instead of "nextclade/nextclade.tsv".
   - updating the results for testing dataset under "testdata" dir
+### Friday, April 10, 2026, Sunny day
+- Dental
+- commit the rsv bug fixes to github and updated the production directory
+- meet jo to help her to clean her home dir
+- 
