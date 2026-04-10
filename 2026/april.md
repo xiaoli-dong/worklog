@@ -47,4 +47,4 @@
 - Dental
 - commit the rsv bug fixes to github and updated the production directory
 - meet jo to help her to clean her home dir
-- 
+- todo: add both nextclade and squirrel clade and lineage assignment to the mpxv_master.tsv. may also add score
