@@ -48,3 +48,14 @@
 - commit the rsv bug fixes to github and updated the production directory
 - meet jo to help her to clean her home dir
 - todo: add both nextclade and squirrel clade and lineage assignment to the mpxv_master.tsv. may also add score
+### Monday, April 13, 2026, Sunny
+- dr appt
+- pipeline launcher of nf-fluab problems:
+  - output dir structures are not the same af fluab originally one
+  - snp calling is using bcftools instead of freebayer
+  - do not have fastq file renaming
+  - missing nanopore procedure
+- book a meeting with andrew to get the problem solved
+- mpxv pipeline
+- added both nextclade and squirrel clade, lineage, and score to the summary report
+- 
