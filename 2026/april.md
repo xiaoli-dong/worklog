@@ -58,4 +58,7 @@
 - book a meeting with andrew to get the problem solved
 - mpxv pipeline
 - added both nextclade and squirrel clade, lineage, and score to the summary report
+### Tuesday, April 13, 2026
+- mainly working on refine mpxv-analyzer pipeline, merged illumina and nanopore data anlayis into one scripts
+- meet Andrew to discuss about the nf-fluab intergraton into pipeline launcher. There aare some parameter issues and also missing nanopore procedure
 - 
