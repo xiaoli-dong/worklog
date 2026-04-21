@@ -58,7 +58,37 @@
 - book a meeting with andrew to get the problem solved
 - mpxv pipeline
 - added both nextclade and squirrel clade, lineage, and score to the summary report
-### Tuesday, April 13, 2026
+### Tuesday, April 14, 2026
 - mainly working on refine mpxv-analyzer pipeline, merged illumina and nanopore data anlayis into one scripts
 - meet Andrew to discuss about the nf-fluab intergraton into pipeline launcher. There aare some parameter issues and also missing nanopore procedure
-- 
+
+### Wednesday, April 15 -16
+- Added all the pipeline I implemented into the "Development_pipeline_update_tracker.xlsx
+  - influenza
+  - pcrvalidator
+  - rsv-analyzer
+  - mpxv-analyzer
+  - artic-mpxv-illumina-nf
+  - artic-mpxv-nf
+  - nf-qcflow
+  - nf-covflow
+  - nf-viroflow
+  - nf-taxflow
+  - nf-assembflow
+  - mev-analyzer
+  - ospc-amplicon
+  - nanopore-16srrna
+  - human parechviruses
+### Friday, April 17, 2026
+- pcrValidator errors fro Jo when she was downloading covid and influenza data
+  - IncompleteRead errors, NCBI connection drop
+  - fix: catch exception + reduce batch size from 500 each request to 100
+- Get update from Andrew about the progress of the influenza pipeline into pipeline launcher, it is done but needs more test, he is off and will work on it next Tuesday
+
+------------
+### Monday, April 20, 2026
+- Jo is still having problems with covid and influenza downloading using pcrValidator
+- working on testing mpxv-analyzer with following two runs, they have the same samples run on Nanopore Ligattion and Illumina Original protocol
+  - 240822_S_N_132 Nanopore Ligation, barcodes 73-80
+  - 240822_S_I_133 Illumina Original, barcodes 1-8
+- when running artic pipeine with nanopore data, pointed the moddel directory to local directory, /nfs/APL_Genomics/db/prod/clair3/artic_models instead of "/user/local/bin/models" because it only included limited number of models with the artic singulairty image
