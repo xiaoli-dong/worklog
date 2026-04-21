@@ -99,5 +99,8 @@
     - 240829_S_N_137 (~5 GB; samples 58, 59)
     - 240830_S_N_137 (~8 GB; appears to be merged data for samples 58, 59)
     - 240829_S_N_137_Repeat (samples 58, 59)
-  - cannot locate  240924_S_N_148 in the 2024_RUNS directory
+  - cannot locate  240924_S_N_148 in the 2024_RUNS directory 
   - run 240910_S_N_139, the tracker lists samples 58 and 59, but the directory contains samples 85 and 86
+  - process 260420_N_I_038 with nf-taxflow
+    - fixed a few bugs in nf-taxflow: when update singlem singularity img, need to regenrate database
+    - updated slurm.conf file, the original one included was not working 
