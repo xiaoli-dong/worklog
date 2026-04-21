@@ -92,3 +92,12 @@
   - 240822_S_N_132 Nanopore Ligation, barcodes 73-80
   - 240822_S_I_133 Illumina Original, barcodes 1-8
 - when running artic pipeine with nanopore data, pointed the moddel directory to local directory, /nfs/APL_Genomics/db/prod/clair3/artic_models instead of "/user/local/bin/models" because it only included limited number of models with the artic singulairty image
+
+### Tuesday, April 21, 2026
+- consolidating all the mpxv FASTQ files from multiple runs into a central directory using the Excel sheet anita shared
+  - For run 137 (2024), there are multiple associated directories, unsure which of these should be used for downstream processing
+    - 240829_S_N_137 (~5 GB; samples 58, 59)
+    - 240830_S_N_137 (~8 GB; appears to be merged data for samples 58, 59)
+    - 240829_S_N_137_Repeat (samples 58, 59)
+  - cannot locate  240924_S_N_148 in the 2024_RUNS directory
+  - run 240910_S_N_139, the tracker lists samples 58 and 59, but the directory contains samples 85 and 86
