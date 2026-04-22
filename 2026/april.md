@@ -104,3 +104,8 @@
   - process 260420_N_I_038 with nf-taxflow
     - fixed a few bugs in nf-taxflow: when update singlem singularity img, need to regenrate database
     - updated slurm.conf file, the original one included was not working 
+### Wednesday, April 22, 2026
+- consolidate nf-taxflow based on matthew's test data
+  - udated software version: barrnap, singlem, sylph, slyph-tax, gtdbtk, kraken2
+  - update database: gtdb r226 update to r232, also assoicated ssu_rrna database, kraken2 db updated to 2026 release, sylph, sylph-tax, singlem
+  - testing 
