@@ -119,3 +119,17 @@ The ospC (Outer Surface Protein C) gene in Borrelia burgdorferi is located on a 
 | Bburg_ospC_For1 (OC6+)   | Forward  | Outer     | AAAGAATACATTAAGTGCGATATT    | 24          |
 | Bburg_ospC_Rev1 (OC623-) | Reverse  | Outer     | TTAAGGTTTTTTTTGGACTTTCTGC   | 25          |
 | Bburg_ospC_Rev2 (OC602-) | Reverse  | Nested    | GGGCTTGTAAGCTCTTTAACTG      | 22          |
+
+The amplicon data were done qc by usign nf-qcflow and quality controlled reads (with primer at the both ends retained) then be  analyzed by [CONCOMPRA](https://academic.oup.com/bib/article/26/1/bbae642/7924278). CONCOMPRA is a tool that generates a de novo, consensus-based sequence database from Oxford Nanopore Technology (ONT) amplicon sequencing data, which is then used for abundance profiling of microbial communities. The key steps in the CONCOMPRA workflow are:
+
+##CONCOMPRA Workflow##
+
+- Reads outside the expected amplicon length range are discarded (500-700 bp)
+- Forward reads are identified and primers are trimmed using primer-chop 
+- Insertion, deletion, and substitution rates are estimated from the primer mapping 
+- Top 80% of forward reads with fewest expected errors are retained using Filtlong 
+- Reads are clustered based on 3mer composition using UMAP-OPTICS 
+- Consensus sequences are generated from a subset of reads within each cluster using lamassemble
+- Potentially chimeric consensus sequences are flagged using vsearch uchime_denovo 
+- Consensus sequences are deduplicated and mapped back to the original reads to generate an abundance table (92% identity)
+- Consensus sequences flagged as chimeric are removed to obtain the final, chimera-free consensus sequence table 
