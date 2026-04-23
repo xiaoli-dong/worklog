@@ -132,4 +132,16 @@ The amplicon data were done qc by usign nf-qcflow and quality controlled reads (
 - Consensus sequences are generated from a subset of reads within each cluster using lamassemble
 - Potentially chimeric consensus sequences are flagged using vsearch uchime_denovo 
 - Consensus sequences are deduplicated and mapped back to the original reads to generate an abundance table (92% identity)
-- Consensus sequences flagged as chimeric are removed to obtain the final, chimera-free consensus sequence table 
+- Consensus sequences flagged as chimeric are removed to obtain the final, chimera-free consensus sequence table
+
+##Why Merging consensus sequences across samples##
+The CONCOMPRA workflow generates consensus sequences for each sample individually, and then merges these consensus sequences across all samples. This approach serves two key purposes:
+- It allows CONCOMPRA to detect and remove "local chimeric sequences" - sequences that are chimeric within a single sample. Identifying and removing these local chimeras helps improve the accuracy of the final consensus sequence set.
+- Merging the consensus sequences across samples creates a comprehensive database of unique sequences that can then be used to profile the abundance of each sequence in each sample. This allows CONCOMPRA to quantify the community composition without relying on a pre-existing reference database.
+
+By generating consensus sequences de novo and merging them across samples, CONCOMPRA is able to characterize microbial communities without being limited by the availability or completeness of reference databases.
+
+
+
+
+
