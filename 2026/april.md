@@ -107,5 +107,15 @@
 ### Wednesday, April 22, 2026
 - consolidate nf-taxflow based on matthew's test data
   - udated software version: barrnap, singlem, sylph, slyph-tax, gtdbtk, kraken2
-  - update database: gtdb r226 update to r232, also assoicated ssu_rrna database, kraken2 db updated to 2026 release, sylph, sylph-tax, singlem
-  - testing 
+  - update database: gtdb r226 update to r232, also assoicated ssu_rrna database, kraken2 db updated to 2026 release, sylph, sylph-tax, .
+  - testing
+### Thursday, April 23, 2026
+
+#### ospc-amplicon analysis review:
+The ospC (Outer Surface Protein C) gene in Borrelia burgdorferi is located on a 26-kb circular plasmid (cp26). It encodes a surface-exposed lipoprotein crucial for the transmission of Lyme disease from ticks to mammals. a semi-nested PCR approach was used to detect and genotype the ospC gene
+
+| Primer Name               | Direction | PCR Round | Sequence (5'→3')            | Length (bp) |
+|--------------------------|----------|-----------|-----------------------------|-------------|
+| Bburg_ospC_For1 (OC6+)   | Forward  | Outer     | AAAGAATACATTAAGTGCGATATT    | 24          |
+| Bburg_ospC_Rev1 (OC623-) | Reverse  | Outer     | TTAAGGTTTTTTTTGGACTTTCTGC   | 25          |
+| Bburg_ospC_Rev2 (OC602-) | Reverse  | Nested    | GGGCTTGTAAGCTCTTTAACTG      | 22          |
