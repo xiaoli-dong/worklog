@@ -141,7 +141,13 @@ The CONCOMPRA workflow generates consensus sequences for each sample individuall
 
 By generating consensus sequences de novo and merging them across samples, CONCOMPRA is able to characterize microbial communities without being limited by the availability or completeness of reference databases.
 
+#### meet with kanti to discuss the ospc analysis results
+  - keep current analysis strategy, kant to confirm whether those program identified consensus needs to be included to the furthur anlayis and she get back as "yes"
+  - furthur analysis: split consensus to samples, phylogenetic analysis
+---
 
+### Friday, April 24, 2026 
 
+#### reading
 
 
