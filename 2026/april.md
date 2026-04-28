@@ -150,4 +150,11 @@ By generating consensus sequences de novo and merging them across samples, CONCO
 
 #### reading
 
+### Tuesday, April 28, 2026
+
+- [Four Clones of Borrelia burgdorferiSensu Stricto Cause Invasive Infection in Humans](https://journals.asm.org/doi/10.1128/iai.67.7.3518-3524.1999)
+  - 19 major ospC groups, groups A through S in Table 1
+- [Genetic Diversity of ospC in a Local Population of Borrelia burgdorferi sensu stricto](https://academic.oup.com/genetics/article/151/1/15/6032949)
+    - The 19 major ospC allele groups for Borrelia burgdorferi sensu stricto and the within-group percentage differences
+
 
