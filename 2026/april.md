@@ -157,4 +157,10 @@ By generating consensus sequences de novo and merging them across samples, CONCO
 - [Genetic Diversity of ospC in a Local Population of Borrelia burgdorferi sensu stricto](https://academic.oup.com/genetics/article/151/1/15/6032949)
     - The 19 major ospC allele groups for Borrelia burgdorferi sensu stricto and the within-group percentage differences
 
+### Thursday, April 30, 2026
+
+- [Geographic Uniformity of the Lyme Disease Spirochete (Borrelia burgdorferi) and Its Shared History With Tick Vector (Ixodes scapularis) in the Northeastern United States](https://academic.oup.com/genetics/article/160/3/833/6052526)
+- [Genetic Diversity of ospC in a Local Population of Borrelia burgdorferi sensu stricto](https://academic.oup.com/genetics/article/151/1/15/6032949)
+- [Four Clones of Borrelia burgdorferiSensu Stricto Cause Invasive Infection in Humans](https://journals.asm.org/doi/10.1128/iai.67.7.3518-3524.1999)
+-[Possible effect of mutations on serological detection of Borrelia burgdorferi sensu stricto ospCmajorgroups: Anin-silico study](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0292741)
 
