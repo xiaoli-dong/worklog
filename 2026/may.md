@@ -58,4 +58,5 @@ SNAPPI meeting:
 
 ### May 8, 2026, Friday
 - timesheet and scf done
-- 
+- updated nf-qcflow for bug fix, tool version change, database upgrade, cleaned nextflow.config file
+- update nf-taxflow for bug fix, tool version change, database upgrade, cleaned nextflow.config file
