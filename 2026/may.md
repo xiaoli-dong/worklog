@@ -60,3 +60,4 @@ SNAPPI meeting:
 - timesheet and scf done
 - updated nf-qcflow for bug fix, tool version change, database upgrade, cleaned nextflow.config file
 - update nf-taxflow for bug fix, tool version change, database upgrade, cleaned nextflow.config file
+- updated readme files and added workflow diagram
