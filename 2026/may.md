@@ -61,3 +61,9 @@ SNAPPI meeting:
 - updated nf-qcflow for bug fix, tool version change, database upgrade, cleaned nextflow.config file
 - update nf-taxflow for bug fix, tool version change, database upgrade, cleaned nextflow.config file
 - updated readme files and added workflow diagram
+
+### May 11, 2026, Monday
+- working on cap audit preparation 
+- mpxv data analysis
+- pathogenseq
+- flu pipeline database update?
