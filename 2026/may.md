@@ -63,7 +63,20 @@ SNAPPI meeting:
 - updated readme files and added workflow diagram
 
 ### May 11, 2026, Monday
-- working on cap audit preparation 
-- mpxv data analysis
-- pathogenseq
-- flu pipeline database update?
+- TODO LIST
+  - working on cap audit preparation 
+  - mpxv data analysis
+  - pathogenseq
+  - flu pipeline database update?
+  - OSPC analysis continue
+- ospc analysis
+  - want to download all the borrelia dna sequences. it should include all the borrelia speices which could cause lyme disease
+  - the term used will be "Borrelia burgdorferi sensu lato", In scientific literature, "sensu lato" means "in the broad sense". It is used to refer to a species complex that includes all the individual species (or "genospecies") capable of causing Lyme disease.
+  - https://www.ncbi.nlm.nih.gov/datasets/taxonomy/64895/
+### May 12, 2026
+- meet vince to prepare for cap audit
+  - focus on documentation: sops, problems trouble shooting, software maintaiance, questions about trainning, record how qulify for to run pipeline, training record, auditor detail question: pathogenseq, component, qc matrix, different tools for differet data type,
+  - run program and log files, walk her through a typical analysis, to see, what happened downstreams, step by step after get the data, output, qc matrix, anything does not meeting, qc threashold, want to understand the whole process,
+  - where the data stored, phyical locations, backup schedulres about the data,
+  - what we do after we update pipeline, what happened, sent out communication, if the linage updated, do we reanalyze our data. all about clinc, only focus on the results go out,
+  - ebs database a little bit, what get stored,  log, ashwind maintain a big log files ( a little bit),  how do you know when you need to answer tools or databases. 
