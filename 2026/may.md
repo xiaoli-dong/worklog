@@ -79,4 +79,20 @@ SNAPPI meeting:
   - run program and log files, walk her through a typical analysis, to see, what happened downstreams, step by step after get the data, output, qc matrix, anything does not meeting, qc threashold, want to understand the whole process,
   - where the data stored, phyical locations, backup schedulres about the data,
   - what we do after we update pipeline, what happened, sent out communication, if the linage updated, do we reanalyze our data. all about clinc, only focus on the results go out,
-  - ebs database a little bit, what get stored,  log, ashwind maintain a big log files ( a little bit),  how do you know when you need to answer tools or databases. 
+  - ebs database a little bit, what get stored,  log, ashwind maintain a big log files ( a little bit),  how do you know when you need to answer tools or databases.
+
+### May 14, 2026
+- ospc analysis
+  - setup compara analysis at 100% identity
+  - clean the barbour reference sequeces
+    - t_coffee alignmet, then only keep regions between forward primer and nested primers not including primers
+    -   
+- cap aduit
+  - create bioinformatic training tracker
+  -  
+- CPHLN meeting:
+  -RUiming presentation
+    - flu mutation watch list, machine leaning, measure distance
+    - IRVC influenza database
+      <img width="1211" height="490" alt="image" src="https://github.com/user-attachments/assets/561b5180-a667-492d-84c2-1b6b9bc4adc2" />
+
