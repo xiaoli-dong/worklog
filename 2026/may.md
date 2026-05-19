@@ -96,5 +96,8 @@ SNAPPI meeting:
     - IRVC influenza database
       <img width="1211" height="490" alt="image" src="https://github.com/user-attachments/assets/561b5180-a667-492d-84c2-1b6b9bc4adc2" />
 
-### May 19, 2026
-- pipeline launcher competency 
+### May 19, 2026, Sum
+#### pipeline launcher competency:
+
+For Illumina sequencing, the analysis pipeline starts automatically shortly after the run is set up on the sequencer and the Pipeline Launcher is initiated.For Nanopore sequencing, the workflow is different. After the sequencing run is completed, the output data must first be manually transferred from the sequencer to APLGenomics. The Pipeline Launcher is then started to split the data and begin the downstream analysis.
+
