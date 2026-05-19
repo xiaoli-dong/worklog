@@ -96,3 +96,5 @@ SNAPPI meeting:
     - IRVC influenza database
       <img width="1211" height="490" alt="image" src="https://github.com/user-attachments/assets/561b5180-a667-492d-84c2-1b6b9bc4adc2" />
 
+### May 19, 2026
+- pipeline launcher competency 
