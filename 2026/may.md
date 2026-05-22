@@ -101,3 +101,11 @@ SNAPPI meeting:
 
 For Illumina sequencing, the analysis pipeline starts automatically shortly after the run is set up on the sequencer and the Pipeline Launcher is initiated.For Nanopore sequencing, the workflow is different. After the sequencing run is completed, the output data must first be manually transferred from the sequencer to APLGenomics. The Pipeline Launcher is then started to split the data and begin the downstream analysis.
 
+### May 21
+MPXV
+For Clade II, the reference used is NC_063383 and for Clade I, we use NC_003310. This means that all coordinates within an alignment will be relative to these references. A benefit of this is that within a clade, alignment files and be combined without having to recalculate the alignment. Note however that insertions relative to the reference sequence will not be included in the alignment.
+
+Squirrel by default creates a single alignment fasta file. Using the genbank coordinates for NC_063383 it also has the ability to extract the aligned coding sequences either as separate records or as a concatenated alignment. This can facilitate codon-aware phylogenetic or sequence analysis.
+- meeting with tarah
+- <img width="1065" height="309" alt="image" src="https://github.com/user-attachments/assets/7c5d9b30-b6f8-4005-934c-352ac678f235" />
+
