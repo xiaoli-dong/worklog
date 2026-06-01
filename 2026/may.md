@@ -105,6 +105,13 @@ For Illumina sequencing, the analysis pipeline starts automatically shortly afte
 MPXV
 For Clade II, the reference used is NC_063383 and for Clade I, we use NC_003310. This means that all coordinates within an alignment will be relative to these references. A benefit of this is that within a clade, alignment files and be combined without having to recalculate the alignment. Note however that insertions relative to the reference sequence will not be included in the alignment.
 
+### May 29
+- mpxv
+  -  To date, no antiviral treatment has been definitively demonstrated to be effective against MPXV.
+  -  WHO and several national guidelines recommended tecovirimat as the first-line antiviral drug for mpox, However, recent studies reported that, during the mpox outbreak in the United States, severely immunocompromised patients who received multiple courses of tecovirimat exhibited poor outcomes (35.3%; 18 out of 51 patients)
+  -  Resistance-associated mutations, such as F13L gene mutation, may lead to treatment failure and human-to-human transmission,
+  -  Cidofovir exhibits broad-spectrum activity against DNA viruses, such as MPXV.
+  -  
 Squirrel by default creates a single alignment fasta file. Using the genbank coordinates for NC_063383 it also has the ability to extract the aligned coding sequences either as separate records or as a concatenated alignment. This can facilitate codon-aware phylogenetic or sequence analysis.
 - meeting with tarah
 - <img width="1065" height="309" alt="image" src="https://github.com/user-attachments/assets/7c5d9b30-b6f8-4005-934c-352ac678f235" />
