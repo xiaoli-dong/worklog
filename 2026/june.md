@@ -29,3 +29,4 @@
   - Conclusion
     - For clinical samples, keeping barcode detection at both ends is still reasonable.
     - This is important given variable viral loads and the higher sensitivity of low-coverage samples to contamination.
+- Run nf-taxflow on bac_16S\260525_N_I_052\analysis_apl\results
