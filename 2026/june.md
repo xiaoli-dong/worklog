@@ -1,6 +1,6 @@
 # Day-to-Day Work Log
 
-# June 1, 2026, Monday, rainning day
+# June 1, 2026, Monday, rainy day
 - Lab meeting: 
 - Continue to work on monkeypox data analysis for Jamil's paper
   - Primarily concerns tecovirimat, the leading antiviral medication
