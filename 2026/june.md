@@ -67,5 +67,10 @@
        refstats=$output_dir/${MP}_MLST_Mapped_RefStats.tsv \
        scafstats=$output_dir/${MP}_MLST_Mapped_Scafstats.tsv
      ```
-  - You may go through all that and see that the Kraken2 results aren't being fully covered by your reference database.  What I'll usually do is map again with a lower minid of ~80% on a reference genome of what it says it should be mapping to and try to figure out where those reads are going to, and what if existent would be better on NCBI. Then I would add that to the database for BBMap and BBSplit and run again. Obviously the process is greatly simplified if you pull the BBsplit numbers into R to build an overview of where reads are going to for each sample. 
+  - You may go through all that and see that the Kraken2 results aren't being fully covered by your reference database.  What I'll usually do is map again with a lower minid of ~80% on a reference genome of what it says it should be mapping to and try to figure out where those reads are going to, and what if existent would be better on NCBI. Then I would add that to the database for BBMap and BBSplit and run again. Obviously the process is greatly simplified if you pull the BBsplit numbers into R to build an overview of where reads are going to for each sample.
 
+## Thursday
+- Arbovirus proble meeting with Daniel kos,Ashlyn Kirk, Andrew Cameron
+  - update with the run
+    - workflow from Ashlyn:  illumina rna capture,  not total nuclitide acid
+    - regina create their own virus databases (source is ncbi high quality data such as refseq)
