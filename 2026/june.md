@@ -30,3 +30,51 @@
     - For clinical samples, keeping barcode detection at both ends is still reasonable.
     - This is important given variable viral loads and the higher sensitivity of low-coverage samples to contamination.
 - Run nf-taxflow on bac_16S\260525_N_I_052\analysis_apl\results
+
+---
+## June 3, 2026 (Wednesday, sunny day)
+- transfer the nf-taxflow to bac_16s for matthew
+- look into the arbovirus probe pane sequence results: \APL_Genomics\nextseq\260508_S_I_025, the following is the workflow used in Andrew Cameron group in univerisy of regina
+  
+```
+  from Daniel.Kos@uregina.ca, Daniel Kos
+  Part 1.
+  
+  I'll usually start with fastp, then filter out my host reads (my typical patients go moo) with bowtie2 where I keep the reads that don't map. Even if this doesn't get all the reads, it at least reduces downstream processing times.
+  
+      bowtie2 -x ${REF}/Bos_taurus -1 $RRP/${SRR}_R1.fastq.gz -2 $RRP/${SRR}_R2.fastq.gz \
+              --un-conc-gz Post_Host_Removal/${SRR}_NotBT.fastq.gz \
+              --met-file Post_Host_Removal/Metrics_${SRR}.txt \
+              --no-unal --no-hd --no-sq -p 16 --mm > /dev/null 
+  
+  then into Megahit with a minimum contig length of 500 bp. Usually already the top few contigs will be significant. 
+  As you've already done, I would also run kraken2 on a custom relevant database from the filtered reads with a minimum ID of 80. 
+  Part 2. (iterative).
+  This is where it can get a little bit more manual. Based on your kraken2 results you'll want to put together a reference database to map to. If you got any complete genomes in your MAGS, definitely put those in too!
+  
+  My personal tool of choice for this is bbsplit for getting a count and bbmap for viewing overall coverage.
+  
+        bbsplit.sh ref=$input_dir_G/MLST_CDS.fasta \
+                 in=$input_dir_F/${MP}.fastq.1.gz \
+                 in2=$input_dir_F/${MP}.fastq.2.gz \
+              minid=0.95 \
+              local=t \
+              scafstats=$output_dir/${MP}_MLST_Mapped_Scafstats.tsv
+  
+         bbmap.sh ref=$input_dir_G/MLST_CDS.fasta \
+                 in=$input_dir_F/${MP}.fastq.1.gz \
+                 in2=$input_dir_F/${MP}.fastq.2.gz \
+                 kfilter=25 subfilter=20 maxindel=3 \
+                 outm=$output_dir/${MP}_MLST_Mapped.sam \
+                 insfilter=0 delfilter=0\
+                ambiguous=all\
+                minid=0.95 \
+                local=t \
+                secondary=t\
+                pairedonly=t\
+                refstats=$output_dir/${MP}_MLST_Mapped_RefStats.tsv \
+                scafstats=$output_dir/${MP}_MLST_Mapped_Scafstats.tsv 
+  
+  You may go through all that and see that the Kraken2 results aren't being fully covered by your reference database.  What I'll usually do is map again with a lower minid of ~80% on a reference genome of what it says it should be mapping to and try to figure out where those reads are going to, and what if existent would be better on NCBI. Then I would add that to the database for BBMap and BBSplit and run again. Obviously the process is greatly simplified if you pull the BBsplit numbers into R to build an overview of where reads are going to for each sample. 
+
+``` 
