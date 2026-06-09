@@ -74,3 +74,16 @@
   - update with the run
     - workflow from Ashlyn:  illumina rna capture,  not total nuclitide acid
     - regina create their own virus databases (source is ncbi high quality data such as refseq)
+
+---
+
+## Monday, June 8, Sunny
+- lab meeting: need slrum, linux competency form
+- working on background reading of mpox
+
+## Tuesday
+- request mpox final report format
+- got linux, slurm competency sign-off form from anita
+- 
+assignment
+D599, cannot open course material
