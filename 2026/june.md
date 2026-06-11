@@ -84,6 +84,13 @@
 ## Tuesday
 - request mpox final report format
 - got linux, slurm competency sign-off form from anita
-- 
-assignment
-D599, cannot open course material
+- drafted linux, slurm sign off forms and sent it off for feedback
+
+## Wednesday
+- Got metadata from Jamil and integrated it with the mpxv_master.tsv
+- the mpox run tracker has some key and run id consistency issues, fixed it.
+- Linux sequencer all failed in the same way becuase the nanopore certificate failed. update the key 
+## Thursday
+- CHP meeting
+  - measle (hiebert joanne presentation): measeq pipeline, atcc reference genome, N450 submit to MeanNS, n450 tree, wgs submitted to pathoplexus.org
+  - work plan: 
