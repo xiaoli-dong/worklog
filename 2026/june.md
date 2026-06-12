@@ -93,4 +93,9 @@
 ## Thursday
 - CPHLN meeting
   - measle (hiebert joanne presentation): measeq pipeline, atcc reference genome, N450 submit to MeanNS, n450 tree, wgs submitted to pathoplexus.org
-  - Sequencer upgrade: suspend for now but work with IT to get our system properly backed up. Met with chandra and rehan bari to discuss the possibility. The answer is yes and I will create a ticket tomorrow morning with chandra to move this forward. 
+  - Sequencer upgrade: suspend for now but work with IT to get our system properly backed up. Met with chandra and rehan bari to discuss the possibility. The answer is yes and I will create a ticket tomorrow morning with chandra to move this forward.
+
+## Friday
+- work with chandra to create ticket for backup sequencers to IT
+- generated slurm tutorial
+- 
