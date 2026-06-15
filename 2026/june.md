@@ -98,4 +98,16 @@
 ## Friday
 - work with chandra to create ticket for backup sequencers to IT
 - generated slurm tutorial
-- 
+
+---
+# June 15, 2026, Monday Sunny
+- research meeting
+- reading measeq MeaSeq pipeline shared in CPHLN meeting: [Evaluation of MeaSeq: comprehensive analysis and reporting of measles virus whole genome sequences](https://www.biorxiv.org/content/10.64898/2026.05.12.724559v1)
+  - we are using virarecon to process the data. In the virarecon,
+    - variant calling was performed with ivar variants with  "-t 0.25 -q 20 -m 10" option. -q is teh minimum quality score threshold to count base, -t is the min frequency threshold to call variants, -, is the min reads depth to call variant
+    - no clade or linegae assignment. In the default parameter config, the nextclade were disabled and pangolin was on and did not produce lineage information
+          
+  - MesSeq:
+    - Candidate variant calling is performed using Freebayes [32] with final variants and ambiguous positions determined with a set of filtering parameters. Initially, candidate variants are filtered based on a minimum quality score of 20, set based on the Freebayes documentation, along with a minimum depth of 10 reads. Variants with allele frequencies between 0.30 and 0.75 are considered ambiguous due to discordance in the underlying sequencing data which may stem from viral evolution or underlying sequencing artifacts. Variants with an allele frequency greater than 0.75 are considered to pass and are designated as a single nucleotide polymorphism (SNP) for that position. Indel variants are applied at a lower passing frequency of 0.60 to account for alignment ifficulties in the lower complexity regions of the MeV genome.
+    - The MeaSeq pipeline was first validated against ATCC reference sequences using NGS read data generated from a variety of sequencing approaches with minimal, low impact differences seen between the 472 MeaSeq-consensus sequences and the reference sequences.
+    - The rule-of-six divisibility check built into MeaSeq
