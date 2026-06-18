@@ -1,113 +1,184 @@
 # Day-to-Day Work Log
 
-# June 1, 2026, Monday, rainy day
-- Lab meeting: 
-- Continue to work on monkeypox data analysis for Jamil's paper
-  - Primarily concerns tecovirimat, the leading antiviral medication
-    - Tecovirimat selectively targets the extracellular enveloped virus formation protein, F13L (also known as gp045) encode VP37, a conserved protein across all orthopoxviruses (OPXVs) involved in secondary envelope formation. [ref] F13L gene is strongly conserved across all known members of the orthopoxvirus genus(https://doi.org/10.1093/infdis/jiaf471) 
-    - It targets the F13 protein, blocking the virus from leaving infected cells. Resistance mutations in the F13 gene prevent the drug from binding.
-    - mutations in the viral target protein (the F13 gene) can emerge, particaularly during prolonged use in  severely immunocompromised indeviduals. 
-- Cidofovir & Brincidofovir
-  -  Alternative drugs that inhibit viral DNA replication but carry higher risks of toxicity.
----
-## June 2, 2026 (Tuesday, rainy day)
+## Monday, June 1, 2026 (Rainy)
 
-- Mpox sequencing follow-up with Kanti: Runs done with COVID samples, so barcode detection requires both ends, are we throwing away too many sequences because the amplicon size is around 2500bps
-  - Why both-end barcodes
-    - Reduce barcode misclassification
-    - Detect barcode hopping/chimeras
-    - Improve consensus accuracy
-    - Trade-off: some reads are lost due to:
-      - missing barcode at one end
-      - truncated reads
-      - low-quality ends
-  - R10 run summary
-    - 240822_S_N_132-barcode73: 308,189 total / 12,052 failed (3.91%)
-    - 240822_S_N_132-barcode74: 441,071 total / 16,767 failed (3.80%)
-    - 240822_S_N_132-barcode73 QC note:
-      - avg read length ~615 bp → likely pre-barcoding fragmentation, which suggests read loss from dual-end requirement is limited
-  - Conclusion
-    - For clinical samples, keeping barcode detection at both ends is still reasonable.
-    - This is important given variable viral loads and the higher sensitivity of low-coverage samples to contamination.
-- Run nf-taxflow on bac_16S\260525_N_I_052\analysis_apl\results
-
----
-## June 3, 2026 (Wednesday, sunny day)
-- transfer the nf-taxflow to bac_16s for matthew
-- look into the arbovirus probe pane sequence results: \APL_Genomics\nextseq\260508_S_I_025, the following is the workflow used in Andrew Cameron group in univerisy of regina. (from Daniel.Kos@uregina.ca, Daniel Kos)
-  - Part 1: I'll usually start with fastp, then filter out my host reads (my typical patients go moo) with bowtie2 where I keep the reads that don't map. Even if this doesn't get all the reads, it at least reduces downstream processing times. then into Megahit with a minimum contig length of 500 bp. Usually already the top few contigs will be significant. As you've already done, I would also run kraken2 on a custom relevant database from the filtered reads with a minimum ID of 80. 
-  
-    ```
-    bowtie2 -x ${REF}/Bos_taurus -1 $RRP/${SRR}_R1.fastq.gz -2 $RRP/${SRR}_R2.fastq.gz \
-      --un-conc-gz Post_Host_Removal/${SRR}_NotBT.fastq.gz \
-      --met-file Post_Host_Removal/Metrics_${SRR}.txt \
-      --no-unal --no-hd --no-sq -p 16 --mm > /dev/null 
-    ```
-  - Part 2. (iterative): This is where it can get a little bit more manual. Based on your kraken2 results you'll want to put together a reference database to map to. If you got any complete genomes in your MAGS, definitely put those in too! My personal tool of choice for this is bbsplit for getting a count and bbmap for viewing overall coverage.
-
-     ```
-     bbsplit.sh ref=$input_dir_G/MLST_CDS.fasta \
-       in=$input_dir_F/${MP}.fastq.1.gz \
-       in2=$input_dir_F/${MP}.fastq.2.gz \
-       minid=0.95 \
-       local=t \
-       scafstats=$output_dir/${MP}_MLST_Mapped_Scafstats.tsv
-
-     bbmap.sh ref=$input_dir_G/MLST_CDS.fasta \
-       in=$input_dir_F/${MP}.fastq.1.gz \
-       in2=$input_dir_F/${MP}.fastq.2.gz \
-       kfilter=25 subfilter=20 maxindel=3 \
-       outm=$output_dir/${MP}_MLST_Mapped.sam \
-       insfilter=0 delfilter=0\
-       ambiguous=all\
-       minid=0.95 \
-       local=t \
-       secondary=t\
-       pairedonly=t\
-       refstats=$output_dir/${MP}_MLST_Mapped_RefStats.tsv \
-       scafstats=$output_dir/${MP}_MLST_Mapped_Scafstats.tsv
-     ```
-  - You may go through all that and see that the Kraken2 results aren't being fully covered by your reference database.  What I'll usually do is map again with a lower minid of ~80% on a reference genome of what it says it should be mapping to and try to figure out where those reads are going to, and what if existent would be better on NCBI. Then I would add that to the database for BBMap and BBSplit and run again. Obviously the process is greatly simplified if you pull the BBsplit numbers into R to build an overview of where reads are going to for each sample.
-
-## Thursday
-- Arbovirus proble meeting with Daniel kos,Ashlyn Kirk, Andrew Cameron
-  - update with the run
-    - workflow from Ashlyn:  illumina rna capture,  not total nuclitide acid
-    - regina create their own virus databases (source is ncbi high quality data such as refseq)
+- Lab meeting
+- Continue work on monkeypox data analysis for Jamil's paper
+  - **Tecovirimat (leading antiviral medication):**
+    - Selectively targets the extracellular enveloped virus formation protein, F13L (also known as gp045), which encodes VP37—a conserved protein across all orthopoxviruses (OPXVs) involved in secondary envelope formation
+    - The F13L gene is strongly conserved across all known members of the orthopoxvirus genus
+    - It targets the F13 protein, blocking the virus from leaving infected cells
+    - Resistance mutations in the F13 gene prevent the drug from binding
+    - Mutations in the viral target protein (the F13 gene) can emerge, particularly during prolonged use in severely immunocompromised individuals
+  - **Cidofovir & Brincidofovir:**
+    - Alternative drugs that inhibit viral DNA replication but carry higher risks of toxicity
 
 ---
 
-## Monday, June 8, Sunny
-- lab meeting: need slrum, linux competency form
-- working on background reading of mpox
+## Tuesday, June 2, 2026 (Rainy)
 
-## Tuesday
-- request mpox final report format
-- got linux, slurm competency sign-off form from anita
-- drafted linux, slurm sign off forms and sent it off for feedback
+- **Mpox sequencing follow-up with Kanti**
+  - Runs completed with COVID samples
+  - Barcode detection requires both ends
+  - Question: Are we discarding too many sequences? Amplicon size: ~2500 bp
 
-## Wednesday
-- Got metadata from Jamil and integrated it with the mpxv_master.tsv
-- the mpox run tracker has some key and run id consistency issues, fixed it.
-- Linux sequencer all failed in the same way becuase the nanopore certificate failed. update the key 
-## Thursday
-- CPHLN meeting
-  - measle (hiebert joanne presentation): measeq pipeline, atcc reference genome, N450 submit to MeanNS, n450 tree, wgs submitted to pathoplexus.org
-  - Sequencer upgrade: suspend for now but work with IT to get our system properly backed up. Met with chandra and rehan bari to discuss the possibility. The answer is yes and I will create a ticket tomorrow morning with chandra to move this forward.
+### Rationale for Dual-End Barcodes
 
-## Friday
-- work with chandra to create ticket for backup sequencers to IT
-- generated slurm tutorial
+- Reduce barcode misclassification
+- Detect barcode hopping/chimeras
+- Improve consensus accuracy
+- Trade-off: Some reads are lost due to missing barcode at one end, truncated reads, or low-quality ends
+
+### R10 Run Summary
+
+- **240822_S_N_132-barcode73:** 308,189 total / 12,052 failed (3.91%)
+- **240822_S_N_132-barcode74:** 441,071 total / 16,767 failed (3.80%)
+- **240822_S_N_132-barcode73 QC note:** Average read length ~615 bp, suggesting pre-barcoding fragmentation. This indicates that read loss from dual-end barcode requirement is limited.
+
+### Conclusion
+
+For clinical samples, keeping barcode detection at both ends remains reasonable. This is important given variable viral loads and the higher sensitivity of low-coverage samples to contamination.
+
+- Run nf-taxflow on `bac_16S\260525_N_I_052\analysis_apl\results`
 
 ---
-# June 15, 2026, Monday Sunny
-- research meeting
-- reading measeq MeaSeq pipeline shared in CPHLN meeting: [Evaluation of MeaSeq: comprehensive analysis and reporting of measles virus whole genome sequences](https://www.biorxiv.org/content/10.64898/2026.05.12.724559v1)
-  - we are using virarecon to process the data. In the virarecon,
-    - variant calling was performed with ivar variants with  "-t 0.25 -q 20 -m 10" option. -q is teh minimum quality score threshold to count base, -t is the min frequency threshold to call variants, -, is the min reads depth to call variant
-    - no clade or linegae assignment. In the default parameter config, the nextclade were disabled and pangolin was on and did not produce lineage information
-          
-  - MesSeq:
-    - Candidate variant calling is performed using Freebayes [32] with final variants and ambiguous positions determined with a set of filtering parameters. Initially, candidate variants are filtered based on a minimum quality score of 20, set based on the Freebayes documentation, along with a minimum depth of 10 reads. Variants with allele frequencies between 0.30 and 0.75 are considered ambiguous due to discordance in the underlying sequencing data which may stem from viral evolution or underlying sequencing artifacts. Variants with an allele frequency greater than 0.75 are considered to pass and are designated as a single nucleotide polymorphism (SNP) for that position. Indel variants are applied at a lower passing frequency of 0.60 to account for alignment ifficulties in the lower complexity regions of the MeV genome.
-    - The MeaSeq pipeline was first validated against ATCC reference sequences using NGS read data generated from a variety of sequencing approaches with minimal, low impact differences seen between the 472 MeaSeq-consensus sequences and the reference sequences.
-    - The rule-of-six divisibility check built into MeaSeq
+
+## Wednesday, June 3, 2026 (Sunny)
+
+- Transfer nf-taxflow to bac_16s for Matthew
+- Investigate arbovirus probe panel sequence results: `\APL_Genomics\nextseq\260508_S_I_025`
+
+### Workflow from Andrew Cameron Group (University of Regina)
+*Provided by Daniel Kos*
+
+#### Part 1: Host Removal and Assembly
+
+Start with fastp, then filter host reads using bowtie2 (keeping reads that do not map). Reduce downstream processing times. Run Megahit with minimum contig length of 500 bp. The top contigs are typically significant. Also run Kraken2 on a custom database with minimum identity threshold of 80%.
+
+```bash
+bowtie2 -x ${REF}/Bos_taurus -1 $RRP/${SRR}_R1.fastq.gz -2 $RRP/${SRR}_R2.fastq.gz \
+  --un-conc-gz Post_Host_Removal/${SRR}_NotBT.fastq.gz \
+  --met-file Post_Host_Removal/Metrics_${SRR}.txt \
+  --no-unal --no-hd --no-sq -p 16 --mm > /dev/null
+```
+
+#### Part 2: Iterative Mapping and Refinement
+
+Based on Kraken2 results, assemble a reference database for mapping. Include complete genomes from MAGs if available. Recommended tools: bbsplit (for count) and bbmap (for coverage visualization).
+
+```bash
+bbsplit.sh ref=$input_dir_G/MLST_CDS.fasta \
+  in=$input_dir_F/${MP}.fastq.1.gz \
+  in2=$input_dir_F/${MP}.fastq.2.gz \
+  minid=0.95 \
+  local=t \
+  scafstats=$output_dir/${MP}_MLST_Mapped_Scafstats.tsv
+
+bbmap.sh ref=$input_dir_G/MLST_CDS.fasta \
+  in=$input_dir_F/${MP}.fastq.1.gz \
+  in2=$input_dir_F/${MP}.fastq.2.gz \
+  kfilter=25 subfilter=20 maxindel=3 \
+  outm=$output_dir/${MP}_MLST_Mapped.sam \
+  insfilter=0 delfilter=0 \
+  ambiguous=all \
+  minid=0.95 \
+  local=t \
+  secondary=t \
+  pairedonly=t \
+  refstats=$output_dir/${MP}_MLST_Mapped_RefStats.tsv \
+  scafstats=$output_dir/${MP}_MLST_Mapped_Scafstats.tsv
+```
+
+If Kraken2 results are not fully covered by the reference database, map again with a lower identity threshold (~80%) to determine where those reads belong. Check NCBI for better reference sequences and add them to the bbmap database. Repeat analysis. Pull bbsplit numbers into R for visualization of read mapping by sample.
+
+---
+
+## Thursday, June 6, 2026
+
+- **Arbovirus probe meeting** with Daniel Kos, Ashlyn Kirk, and Andrew Cameron
+  - Workflow from Ashlyn: Illumina RNA capture (not total nucleotide acid)
+  - Regina group creates their own virus databases using high-quality NCBI data such as RefSeq
+
+---
+
+## Monday, June 8, 2026 (Sunny)
+
+- Lab meeting: Obtain SLURM and Linux competency form
+- Working on background reading of monkeypox
+
+---
+
+## Tuesday, June 10, 2026
+
+- Request monkeypox final report format
+- Obtain Linux and SLURM competency sign-off form from Anita
+- Draft Linux and SLURM sign-off forms; send for feedback
+
+---
+
+## Wednesday, June 11, 2026
+
+- Obtain metadata from Jamil; integrate with mpxv_master.tsv
+- Monkeypox run tracker: Fix key and run ID consistency issues
+- Linux sequencer: All failed with the same error (nanopore certificate failure). Update the key.
+
+---
+
+## Thursday, June 12, 2026
+
+### CPHLN Meeting
+
+**Measles (Presentation by Joanne Hiebert):**
+- MeaSeq pipeline
+- ATCC reference genome
+- N450 submit to MEAN
+- N450 tree
+- WGS submitted to Pathoplexus.org
+
+**Sequencer Upgrade:**
+- Suspend for now but work with IT to properly back up our system
+- Met with Chandra and Rehan Bari to discuss the possibility
+- Answer is yes; will create a ticket tomorrow morning with Chandra to move forward
+
+---
+
+## Friday, June 13, 2026
+
+- Work with Chandra to create ticket for backup sequencers to IT
+- Generate SLURM tutorial
+
+---
+
+## Monday, June 15, 2026 (Sunny)
+
+- Research meeting
+
+### Reading MeaSeq Pipeline
+
+Currently using Virarecon to process measles data.
+
+**Virarecon Parameters:**
+
+Variant calling performed with iVar variants using options: `-t 0.25 -q 20 -m 10`
+
+- **-q:** Minimum quality score threshold to count base
+- **-t:** Minimum frequency threshold to call variants
+- **-m:** Minimum read depth to call variants
+
+*Note: No clade or lineage assignment. In the default parameter config, Nextclade is disabled and Pangolin is enabled but does not produce lineage information.*
+
+### MeaSeq Pipeline
+
+Candidate variant calling performed using Freebayes with final variants and ambiguous positions determined using filtering parameters:
+
+- **Minimum quality score:** 20 (per Freebayes documentation)
+- **Minimum depth:** 10 reads
+- **Allele frequency 0.30–0.75:** Considered ambiguous (due to discordance in sequencing data, possibly from viral evolution or sequencing artifacts)
+- **Allele frequency > 0.75:** Pass filter and designated as SNP
+- **Indel variants:** Lower passing frequency of 0.60 to account for alignment difficulties in low-complexity regions of the MeV genome
+
+**Validation:**
+
+MeaSeq pipeline validated against ATCC reference sequences using NGS read data from various sequencing approaches. Minimal, low-impact differences observed between 472 MeaSeq consensus sequences and reference sequences.
+
+The rule-of-six divisibility check is built into MeaSeq.
