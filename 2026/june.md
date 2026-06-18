@@ -185,6 +185,13 @@ The rule-of-six divisibility check is built into MeaSeq.
 ## Tuesday, June 16, 2026
 nf-fluab bug fixing: - In the nf-fluab v1.0.4, nanopore mapping were not filtered before generating depth, count profile and supplementary alignment were inflating the count. deployed v1.0.5
 
+## TODO LIST
+- pcrValidator
+- measeq testing
+- nf-fluab need revsion
+- maybe create a database updating procedures to do a regular db update
+- ospc data analysis revisit
+- prob capture
 ## Wednesday (sick day)
 ## Thursday, June 18, 2026 (Sunny)
 - Sent email to colin about the path issues associated with R and vscode
