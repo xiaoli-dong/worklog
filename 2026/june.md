@@ -199,6 +199,9 @@ nf-fluab bug fixing: - In the nf-fluab v1.0.4, nanopore mapping were not filtere
 - respond kara's email to add IRVC NML primers to the nf-fluab primer file. It turns out that we had those sequences in the primer file although they named differently
 
 ---
+June 22- 26
+- working on OSPC gene analysis
+- Got miniconda backup (June 10th, 2026) and pandas issues seems everything is fine
 
 ## TODO LIST
 - pcrValidator
