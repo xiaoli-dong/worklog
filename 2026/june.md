@@ -4,40 +4,50 @@
 
 - Lab meeting
 - Continue work on monkeypox data analysis for Jamil's paper
-  - **Tecovirimat (leading antiviral medication):**
-    - Selectively targets the extracellular enveloped virus formation protein, F13L (also known as gp045), which encodes VP37—a conserved protein across all orthopoxviruses (OPXVs) involved in secondary envelope formation
-    - The F13L gene is strongly conserved across all known members of the orthopoxvirus genus
-    - It targets the F13 protein, blocking the virus from leaving infected cells
-    - Resistance mutations in the F13 gene prevent the drug from binding
-    - Mutations in the viral target protein (the F13 gene) can emerge, particularly during prolonged use in severely immunocompromised individuals
-  - **Cidofovir & Brincidofovir:**
-    - Alternative drugs that inhibit viral DNA replication but carry higher risks of toxicity
+
+### Tecovirimat (Leading Antiviral Medication)
+
+- Selectively targets the extracellular enveloped virus formation protein, F13L (also known as gp045), which encodes VP37—a conserved protein across all orthopoxviruses (OPXVs) involved in secondary envelope formation
+- The F13L gene is strongly conserved across all known members of the orthopoxvirus genus
+- It targets the F13 protein, blocking the virus from leaving infected cells
+- Resistance mutations in the F13 gene prevent the drug from binding
+- Mutations in the viral target protein (the F13 gene) can emerge, particularly during prolonged use in severely immunocompromised individuals
+
+### Cidofovir & Brincidofovir
+
+- Alternative drugs that inhibit viral DNA replication but carry higher risks of toxicity
 
 ---
 
 ## Tuesday, June 2, 2026 (Rainy)
 
-- **Mpox sequencing follow-up with Kanti**
-  - Runs completed with COVID samples
-  - Barcode detection requires both ends
-  - Question: Are we discarding too many sequences? Amplicon size: ~2500 bp
+### Mpox Sequencing Follow-up with Kanti
 
-### Rationale for Dual-End Barcodes
+- Runs completed with COVID samples
+- Barcode detection requires both ends
+- Question: Are we discarding too many sequences? Amplicon size: ~2500 bp
+
+#### Rationale for Dual-End Barcodes
 
 - Reduce barcode misclassification
 - Detect barcode hopping/chimeras
 - Improve consensus accuracy
 - Trade-off: Some reads are lost due to missing barcode at one end, truncated reads, or low-quality ends
 
-### R10 Run Summary
+#### R10 Run Summary
 
-- **240822_S_N_132-barcode73:** 308,189 total / 12,052 failed (3.91%)
-- **240822_S_N_132-barcode74:** 441,071 total / 16,767 failed (3.80%)
-- **240822_S_N_132-barcode73 QC note:** Average read length ~615 bp, suggesting pre-barcoding fragmentation. This indicates that read loss from dual-end barcode requirement is limited.
+| Sample | Total Reads | Failed | Failed % | Notes |
+|--------|-------------|--------|----------|-------|
+| 240822_S_N_132-barcode73 | 308,189 | 12,052 | 3.91% | Avg read length ~615 bp, suggesting pre-barcoding fragmentation |
+| 240822_S_N_132-barcode74 | 441,071 | 16,767 | 3.80% | |
 
-### Conclusion
+**QC Note:** Average read length ~615 bp suggests pre-barcoding fragmentation. This indicates that read loss from dual-end barcode requirement is limited.
+
+#### Conclusion
 
 For clinical samples, keeping barcode detection at both ends remains reasonable. This is important given variable viral loads and the higher sensitivity of low-coverage samples to contamination.
+
+#### Actions
 
 - Run nf-taxflow on `bac_16S\260525_N_I_052\analysis_apl\results`
 
@@ -89,15 +99,24 @@ bbmap.sh ref=$input_dir_G/MLST_CDS.fasta \
   scafstats=$output_dir/${MP}_MLST_Mapped_Scafstats.tsv
 ```
 
-If Kraken2 results are not fully covered by the reference database, map again with a lower identity threshold (~80%) to determine where those reads belong. Check NCBI for better reference sequences and add them to the bbmap database. Repeat analysis. Pull bbsplit numbers into R for visualization of read mapping by sample.
+#### Validation and Refinement Process
+
+If Kraken2 results are not fully covered by the reference database:
+1. Map again with a lower identity threshold (~80%) to determine where those reads belong
+2. Check NCBI for better reference sequences and add them to the bbmap database
+3. Repeat analysis
+4. Pull bbsplit numbers into R for visualization of read mapping by sample
 
 ---
 
 ## Thursday, June 6, 2026
 
-- **Arbovirus probe meeting** with Daniel Kos, Ashlyn Kirk, and Andrew Cameron
-  - Workflow from Ashlyn: Illumina RNA capture (not total nucleotide acid)
-  - Regina group creates their own virus databases using high-quality NCBI data such as RefSeq
+### Arbovirus Probe Meeting
+
+**Participants:** Daniel Kos, Ashlyn Kirk, and Andrew Cameron
+
+- Workflow from Ashlyn: Illumina RNA capture (not total nucleotide acid)
+- Regina group creates their own virus databases using high-quality NCBI data such as RefSeq
 
 ---
 
@@ -118,7 +137,7 @@ If Kraken2 results are not fully covered by the reference database, map again wi
 
 ## Wednesday, June 11, 2026
 
-- Obtain metadata from Jamil; integrate with mpxv_master.tsv
+- Obtain metadata from Jamil; integrate with `mpxv_master.tsv`
 - Monkeypox run tracker: Fix key and run ID consistency issues
 - Linux sequencer: All failed with the same error (nanopore certificate failure). Update the key.
 
@@ -128,14 +147,16 @@ If Kraken2 results are not fully covered by the reference database, map again wi
 
 ### CPHLN Meeting
 
-**Measles (Presentation by Joanne Hiebert):**
+#### Measles (Presentation by Joanne Hiebert)
+
 - MeaSeq pipeline
 - ATCC reference genome
 - N450 submit to MEAN
 - N450 tree
 - WGS submitted to Pathoplexus.org
 
-**Sequencer Upgrade:**
+#### Sequencer Upgrade
+
 - Suspend for now but work with IT to properly back up our system
 - Met with Chandra and Rehan Bari to discuss the possibility
 - Answer is yes; will create a ticket tomorrow morning with Chandra to move forward
@@ -151,13 +172,13 @@ If Kraken2 results are not fully covered by the reference database, map again wi
 
 ## Monday, June 15, 2026 (Sunny)
 
-- Research meeting
+### Research Meeting
 
-### Reading MeaSeq Pipeline
+#### Reading MeaSeq Pipeline
 
 Currently using Virarecon to process measles data.
 
-**Virarecon Parameters:**
+##### Virarecon Parameters
 
 Variant calling performed with iVar variants using options: `-t 0.25 -q 20 -m 10`
 
@@ -167,46 +188,59 @@ Variant calling performed with iVar variants using options: `-t 0.25 -q 20 -m 10
 
 *Note: No clade or lineage assignment. In the default parameter config, Nextclade is disabled and Pangolin is enabled but does not produce lineage information.*
 
-### MeaSeq Pipeline
+#### MeaSeq Pipeline
 
 Candidate variant calling performed using Freebayes with final variants and ambiguous positions determined using filtering parameters:
 
-- **Minimum quality score:** 20 (per Freebayes documentation)
-- **Minimum depth:** 10 reads
-- **Allele frequency 0.30–0.75:** Considered ambiguous (due to discordance in sequencing data, possibly from viral evolution or sequencing artifacts)
-- **Allele frequency > 0.75:** Pass filter and designated as SNP
-- **Indel variants:** Lower passing frequency of 0.60 to account for alignment difficulties in low-complexity regions of the MeV genome
+| Parameter | Value | Details |
+|-----------|-------|---------|
+| Minimum quality score | 20 | Per Freebayes documentation |
+| Minimum depth | 10 reads | |
+| Allele frequency 0.30–0.75 | Ambiguous | Due to discordance in sequencing data, possibly from viral evolution or sequencing artifacts |
+| Allele frequency > 0.75 | Pass filter (SNP) | |
+| Indel variants | Passing frequency 0.60 | Lower threshold to account for alignment difficulties in low-complexity regions of the MeV genome |
 
-**Validation:**
+##### Validation
 
 MeaSeq pipeline validated against ATCC reference sequences using NGS read data from various sequencing approaches. Minimal, low-impact differences observed between 472 MeaSeq consensus sequences and reference sequences.
 
-The rule-of-six divisibility check is built into MeaSeq.
+**Note:** The rule-of-six divisibility check is built into MeaSeq.
 
 ---
 
 ## Tuesday, June 16, 2026
-nf-fluab bug fixing: - In the nf-fluab v1.0.4, nanopore mapping were not filtered before generating depth, count profile and supplementary alignment were inflating the count. deployed v1.0.5
+
+### nf-fluab Bug Fixing
+
+In the nf-fluab v1.0.4, nanopore mappings were not filtered before generating depth. Supplementary alignment and count profiles were inflating the count. Deployed v1.0.5 to fix this issue.
 
 ---
 
-## Wednesday (sick day)
+## Wednesday (Sick Day)
 
 ---
 
 ## Thursday, June 18, 2026 (Sunny)
-- Sent email to colin about the path issues associated with R and vscode
-- respond kara's email to add IRVC NML primers to the nf-fluab primer file. It turns out that we had those sequences in the primer file although they named differently
+
+- Sent email to Colin about path issues associated with R and VSCode
+- Responded to Kara's email to add IRVC NML primers to the nf-fluab primer file
+  - Note: Found that those sequences were already in the primer file, though named differently
 
 ---
-June 22- 26
-- working on OSPC gene analysis
-- Got miniconda backup (June 10th, 2026) and pandas issues seems everything is fine
 
-## TODO LIST
-- pcrValidator
-- measeq testing
-- nf-fluab need revsion
-- maybe create a database updating procedures to do a regular db update
-- ospc data analysis revisit
-- prob capture
+## June 22–26, 2026
+
+- Working on OSPC gene analysis
+- Got miniconda backup (June 10th, 2026)
+- Pandas issues resolved—everything appears to be fine
+
+---
+
+## TODO List
+
+- [ ] pcrValidator
+- [ ] measeq testing
+- [ ] nf-fluab revision needed
+- [ ] Create database updating procedures for regular database updates
+- [ ] OSPC data analysis revisit
+- [ ] Prob capture
