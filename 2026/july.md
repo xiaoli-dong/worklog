@@ -9,3 +9,11 @@
 ---
 
 ## Friday, July 3, 2026 (Rainy)
+- work on the bioinfo training and competency check list
+- Andrew fixed pipeline launcher and need to be tested
+
+---
+
+## Monday, July 6, (Sunny)
+- Test pipeline launcher
+- ask for a meeting to training and competency check list
