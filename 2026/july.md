@@ -25,6 +25,7 @@
   - linux and slurm have quizs, which will be locked in the supervisor folder
 - influenza data analysis problem investication
   - H5, H3, H7, H1N2v are consistently lower than the others. need to figure out what happened:
+  
   primers
   ```
   The PathAmp primers:
