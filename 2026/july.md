@@ -52,20 +52,21 @@
   A/Canada/504/2004 : GISAID EPI_ISL_5873
   ```
   
-  | Run | Sample ID | Sample Name | Subtype |
-  |---|---|---|---|
-  | fluA_PathAmp_20260622 | 260624_S_I_032_11_S11 | A/Alberta/001/2014 10^-1 | H5N1 |
-  | fluA_PathAmp_20260622 | 260624_S_I_032_12_S12 | A/Alberta/01/2020 10^-3 | H1N2v |
-  | fluA_PathAmp_20260622 | 260624_S_I_032_13_S13 | A/Anhui/1/13 10^-1 | H7N9 |
-  | fluA_PathAmp_20260622 | 260624_S_I_032_14_S14 | A/Canada/504/04 10^-2 | H7N3 |
-  | fluA_PathAmp_20260622 | 260624_S_I_032_15_S15 | Extr_FluA_H3N2_Pos_MM | H3N2 |
-  | fluA_PathAmp_20260622 | 260624_S_I_032_16_S16 | Extr_UTM_Neg_Ctrl_MM | neg |
+  | Run | Sample ID | Sample Name | Subtype | seg4 | seg6 |
+  |---|---|---|---|---|---|
+  | fluA_PathAmp_20260622 | 260624_S_I_032_11_S11 | A/Alberta/001/2014 10^-1 | H5N1 | | |
+  | fluA_PathAmp_20260622 | 260624_S_I_032_12_S12 | A/Alberta/01/2020 10^-3 | H1N2v | yes | yes|
+  | fluA_PathAmp_20260622 | 260624_S_I_032_13_S13 | A/Anhui/1/13 10^-1 | H7N9 || yes |
+  | fluA_PathAmp_20260622 | 260624_S_I_032_14_S14 | A/Canada/504/04 10^-2 | H7N3 || |
+  | fluA_PathAmp_20260622 | 260624_S_I_032_15_S15 | Extr_FluA_H3N2_Pos_MM | H3N2 | yes | yes |
+  | fluA_PathAmp_20260622 | 260624_S_I_032_16_S16 | Extr_UTM_Neg_Ctrl_MM | neg || |
   | fluA_PathAmp_20260622 | 260624_S_I_032_17_S17 | NTC_Neg_Ctrl | neg |
-  | fluA_IRVC_NML_20260622 | 260624_S_I_032_18_S18 | A/Alberta/001/2014 10^-1 | H5N1 |
-  | fluA_IRVC_NML_20260622 | 260624_S_I_032_19_S19 | A/Alberta/01/2020 10^-3 | H1N2v |
-  | fluA_IRVC_NML_20260622 | 260624_S_I_032_20_S20 | A/Anhui/1/13 10^-1 | H7N9 |
-  | fluA_IRVC_NML_20260622 | 260624_S_I_032_21_S21 | A/Canada/504/04 10^-2 | H7N3 |
-  | fluA_IRVC_NML_20260622 | 260624_S_I_032_22_S22 | Extr_FluA_H3N2_Pos_MM | H3N2 |
-  | fluA_IRVC_NML_20260622 | 260624_S_I_032_23_S23 | Extr_UTM_Neg_Ctrl_MM | neg |
-  | fluA_IRVC_NML_20260622 | 260624_S_I_032_24_S24 | NTC_Neg_Ctrl | neg |
+  | fluA_IRVC_NML_20260622 | 260624_S_I_032_18_S18 | A/Alberta/001/2014 10^-1 | H5N1 ||
+  | fluA_IRVC_NML_20260622 | 260624_S_I_032_19_S19 | A/Alberta/01/2020 10^-3 | H1N2v | yes | yes|
+  | fluA_IRVC_NML_20260622 | 260624_S_I_032_20_S20 | A/Anhui/1/13 10^-1 | H7N9 ||
+  | fluA_IRVC_NML_20260622 | 260624_S_I_032_21_S21 | A/Canada/504/04 10^-2 | H7N3 ||
+  | fluA_IRVC_NML_20260622 | 260624_S_I_032_22_S22 | Extr_FluA_H3N2_Pos_MM | H3N2 | yes | yes|
+  | fluA_IRVC_NML_20260622 | 260624_S_I_032_23_S23 | Extr_UTM_Neg_Ctrl_MM | neg ||
+  | fluA_IRVC_NML_20260622 | 260624_S_I_032_24_S24 | NTC_Neg_Ctrl | neg ||
+
   
