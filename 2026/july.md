@@ -29,18 +29,33 @@
   primers
   ```
   The PathAmp primers:
-    >pathamp_Reverse_Transcription_Primer
-    CTGGATACGCCAGCRAAAGCAGG
-    >pathamp_cDNA_amplification_primer
-    GACCTGATGCGGAGTAGAAACAAGG
-    
+  >pathamp_Reverse_Transcription_Primer
+  CTGGATACGCCAGCRAAAGCAGG
+  >pathamp_cDNA_amplification_primer
+  GACCTGATGCGGAGTAGAAACAAGG
+
+  Reverse compliments
+  >pathamp_Reverse_Transcription_Primer-rc
+  CCTGCTTTYGCTGGCGTATCCAG    
+  >pathamp_cDNA_amplification_primer-rc
+  CCTTGTTTCTACTCCGCATCAGGTC    
+ 
   IRVC primers:
-    >Opti-F1
-    ACGCGTGATCAGCAAAAGCAGG
-    >Opti-F2
-    ACGCGTGATCAGCGAAAGCAGG
-    >MBTuni-13-R
-    ACGCGTGATCAGTAGAAACAAGG
+  >Opti-F1
+  ACGCGTGATCAGCAAAAGCAGG
+  >Opti-F2
+  ACGCGTGATCAGCGAAAGCAGG
+  >MBTuni-13-R
+  ACGCGTGATCAGTAGAAACAAGG
+
+  Reverse compliments
+  >Opti-F1-rc
+  CCTGCTTTTGCTGATCACGCGT  
+  >Opti-F2-rc
+  CCTGCTTTCGCTGATCACGCGT  
+  >MBTuni-13-R-rc
+  CCTTGTTTCTACTGATCACGCGT  
+
   ```
 
   Alberta strains
