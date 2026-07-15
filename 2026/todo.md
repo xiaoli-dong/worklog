@@ -10,4 +10,5 @@
 - mpox
   - review the testing results from Anita
 
-- OSPC meeting   
+- OSPC meeting
+- OTU analysis: emu pike
