@@ -115,12 +115,12 @@
 
 July 13 - 17
 
-Tested the pipeline launcher: 
-  - The pipeline completed successfully, but the post-processing R scripts encountered issues. After discussion with Andrew, the problem appears to be related to missing or changed R package dependencies. It is possible that someone modified the R library environment.
+Tested the pipeline launcher:
+- The pipeline completed successfully, but the post-processing R scripts encountered issues. After discussion with Andrew, the problem appears to be related to missing or changed R package dependencies. It is possible that someone modified the R library environment.
 
 Fixed bugs in the nf-fluab workflow:
-  - The H5 Nextclade outputs were missing several clade-related columns. When using csvtk concat to combine multiple Nextclade TSV files, some files contained the clade information columns while others did not. csvtk concat only retained the common columns shared across all input files, causing the clade columns to be removed from the final output. Since the downstream R scripts expected the clade columns to be present, the analysis failed.
-  - To resolve this issue, I developed a concat_table.py script to merge the tables while preserving all columns. There is still a potential edge case where the R scripts may fail if the analysis contains no H1 or H3 samples, because the expected clade information may not be available.
-  - Generate a new workflow tracker template. This template give me more flexibility to document the changes
-  - 
+- The H5 Nextclade outputs were missing several clade-related columns. When using csvtk concat to combine multiple Nextclade TSV files, some files contained the clade information columns while others did not. csvtk concat only retained the common columns shared across all input files, causing the clade columns to be removed from the final output. Since the downstream R scripts expected the clade columns to be present, the analysis failed.
+- To resolve this issue, I developed a concat_table.py script to merge the tables while preserving all columns. There is still a potential edge case where the R scripts may fail if the analysis contains no H1 or H3 samples, because the expected clade information may not be available.
+- Generate a new workflow tracker template. This template give me more flexibility to document the changes
+
   
